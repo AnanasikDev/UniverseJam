@@ -19,6 +19,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField][ReadOnly][ShowIf("showAllValues")] private float inputVertical;
 
     private Func<string, float> GetMovementInput = null;
+
+    public static PlayerController instance { get; private set; }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void SetMovementInputFunction()
     {
         if (useSmoothInput)
