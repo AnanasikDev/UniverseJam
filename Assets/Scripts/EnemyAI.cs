@@ -19,7 +19,6 @@ public class EnemyAI : MonoBehaviour
     private void Update()
     {
         UpdateMovement();
-        health?.GetDamage(0.06f);
     }
 
     private void UpdateMovement()

@@ -46,7 +46,7 @@ public class HealthComp : MonoBehaviour
         UIBarInstance.SetValue01(GetHealth01());
     }
 
-    public virtual void GetDamage(float value)
+    public virtual void TakeDamage(float value)
     {
         SetHealth(Health - value);
     }

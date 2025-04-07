@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerAttack))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private bool showAllValues = false;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private new Rigidbody rigidbody;
 
+    private PlayerAttack playerAttack;
     public static PlayerController instance { get; private set; }
 
     private void Awake()
@@ -44,23 +46,21 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        playerAttack = GetComponent<PlayerAttack>();
 
         SetMovementInputFunction();
     }
 
     private void Update()
     {
-        UpdateInput();
+        inputHorizontal = GetMovementInput("Horizontal");
+        inputVertical = GetMovementInput("Vertical");
+        playerAttack.UpdateAttack();
     }
+
     private void FixedUpdate()
     {
         UpdateMotion();
-    }
-
-    private void UpdateInput()
-    {
-        inputHorizontal = GetMovementInput("Horizontal");
-        inputVertical = GetMovementInput("Vertical");
     }
 
     private void UpdateMotion()
