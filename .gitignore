@@ -74,5 +74,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Fmod Crap
-Assets/Plugins/FMOD/**/*.bundle text eol=lf
-Assets/Plugins/FMOD/**/Info.plist text eol=lf
+/Assets/Plugins/FMOD/**/*.bundle text eol=lf
+/Assets/Plugins/FMOD/**/Info.plist text eol=lf
