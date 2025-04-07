@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
@@ -23,17 +24,29 @@ public class UIBar : MonoBehaviour
         }
     }
 
-    public void Init()
+    public void Init(float value)
     {
         Assert.AreApproximatelyEqual(background.rectTransform.sizeDelta.x, foreground.rectTransform.sizeDelta.x, "UIBar background and foreground must have identical width");
         width = background.rectTransform.sizeDelta.x;
         defaultForegroundColor = foreground.color;
+        SetValue01Instantly(value);
+    }
+
+    private void SetValue01Instantly(float value)
+    {
+        Value = value;
+        foreground.transform.localPosition = new Vector3(width * (Value - 1.0f), foreground.transform.localPosition.y);
+        if (doAnimateForegroundColor) foreground.color = GetForegroundColor(Value);
     }
 
     public void SetValue01(float value)
     {
+        float prevValue = Value;
         Value = value;
-        foreground.transform.localPosition = new Vector3(width * (Value - 1.0f), foreground.transform.localPosition.y);
+        float diff = Value - prevValue;
+        if (diff == 0) return; // nothing changed;
+
+        foreground.transform.DOLocalMoveX(width * (Value - 1.0f), Mathf.Abs(diff));
         if (doAnimateForegroundColor) foreground.color = GetForegroundColor(Value);
     }
 }

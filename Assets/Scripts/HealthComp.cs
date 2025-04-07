@@ -5,8 +5,8 @@ using UnityEngine.Assertions;
 
 public class HealthComp : MonoBehaviour
 {
-    [ProgressBar("@MinHealth", "@MaxHealth", ColorGetter = "@Color.Lerp(Color.red, Color.green, Health / 100.0f)")]
-    [ShowInInspector] public float Health { get; set; } = 100;
+    [ProgressBar("@MinHealth", "@MaxHealth", ColorGetter = "@Color.Lerp(Color.red, Color.green, AbsoluteHealth / 100.0f)")]
+    [ShowInInspector] public float AbsoluteHealth { get; set; } = 100;
     [ShowInInspector] public float MinHealth { get; set; } = 0;
     [ShowInInspector] public float MaxHealth { get; set; } = 100;
 
@@ -35,8 +35,7 @@ public class HealthComp : MonoBehaviour
             Assert.IsNotNull(canvas);
             Assert.IsNotNull(UIBarPrefab);
             UIBarInstance = Instantiate(UIBarPrefab, canvas.transform);
-            UIBarInstance.Init();
-            UpdateUI(0);
+            UIBarInstance.Init(GetHealth01());
             onHealthChangedEvent += UpdateUI;
         }
     }
@@ -48,14 +47,14 @@ public class HealthComp : MonoBehaviour
 
     public virtual void TakeDamage(float value)
     {
-        SetHealth(Health - value);
+        SetHealth(AbsoluteHealth - value);
     }
 
     public virtual void SetHealth(float value)
     {
-        float prevHealth = Health;
-        Health = Mathf.Clamp(value, MinHealth, MaxHealth);
-        float diff = Health - prevHealth;
+        float prevHealth = AbsoluteHealth;
+        AbsoluteHealth = Mathf.Clamp(value, MinHealth, MaxHealth);
+        float diff = AbsoluteHealth - prevHealth;
         if (diff != 0)
         {
             onHealthChangedEvent?.Invoke(diff);
@@ -69,7 +68,7 @@ public class HealthComp : MonoBehaviour
 
     public float GetHealth01()
     {
-        return (Health - MinHealth) / (MaxHealth - MinHealth);
+        return (AbsoluteHealth - MinHealth) / (MaxHealth - MinHealth);
     }
 
     public virtual void Die()

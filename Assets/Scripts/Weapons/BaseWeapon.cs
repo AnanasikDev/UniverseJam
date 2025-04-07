@@ -19,13 +19,14 @@ public abstract class BaseWeapon : MonoBehaviour
         Debug.Log(data.name + " has been used towards " + targetHealthGroup);
     }
 
-    public virtual float CalculateDamage()
+    public virtual WeaponHitInfo CalculateDamage()
     {
-        float critFactor = (Random.Range(0.0f, 1.0f) < data.critChange) ? data.critFactor : 1;
+        bool isCrit = Random.Range(0.0f, 1.0f) < data.critChange;
+        float critFactor = isCrit ? data.critFactor : 1;
         float randFactor = (Random.Range(1.0f - data.damageRandomization, 1.0f + data.damageRandomization));
         float damage = data.damagePerUse * critFactor * randFactor;
 
-        return damage;
+        return new WeaponHitInfo(damage, isCrit);
     }
 
     private void OnDrawGizmos()
@@ -36,5 +37,17 @@ public abstract class BaseWeapon : MonoBehaviour
         Gizmos.DrawWireSphere(position, data.minDistance);
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(position, data.maxDistance);
+    }
+}
+
+public struct WeaponHitInfo
+{
+    public float finalDamage;
+    public bool isCrit;
+
+    public WeaponHitInfo(float _damage, bool _isCrit)
+    {
+        this.finalDamage = _damage;
+        this.isCrit = _isCrit;
     }
 }
