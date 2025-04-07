@@ -6,6 +6,11 @@ public class EnemyAI : MonoBehaviour
     [Range(0, 6)] public float movementSpeed = 3;
     public bool doFollowPlayer = true;
 
+    private void Start()
+    {
+        Init();
+    }
+
     public void Init()
     {
         TryGetComponent<HealthComp>(out health);
@@ -14,6 +19,7 @@ public class EnemyAI : MonoBehaviour
     private void Update()
     {
         UpdateMovement();
+        health?.GetDamage(0.06f);
     }
 
     private void UpdateMovement()

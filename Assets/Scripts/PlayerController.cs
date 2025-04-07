@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     private Func<string, float> GetMovementInput = null;
 
+    private new Rigidbody rigidbody;
+
     public static PlayerController instance { get; private set; }
 
     private void Awake()
@@ -41,12 +43,17 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
+
         SetMovementInputFunction();
     }
 
     private void Update()
     {
         UpdateInput();
+    }
+    private void FixedUpdate()
+    {
         UpdateMotion();
     }
 
@@ -60,6 +67,6 @@ public class PlayerController : MonoBehaviour
     {
         if (IsIdle) return;
 
-        transform.position += new Vector3(inputHorizontal * speedX, 0, inputVertical * speedZ) * Time.deltaTime;
+        rigidbody.MovePosition(transform.position + new Vector3(inputHorizontal * speedX, 0, inputVertical * speedZ) * Time.fixedDeltaTime);
     }
 }
