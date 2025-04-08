@@ -166,13 +166,14 @@ MonoBehaviour:
   applyBleedingEffect: 1
   bleedingProgress: 0
   bleedingDamageFactor: 3
-  bleedingRestoreSpeed: 0.1
+  bleedingRestoreSpeed: 0.09
   doShowHealthBar: 1
   doShowBleedingBar: 1
   canvas: {fileID: 430487103}
   UIBarPrefab: {fileID: 7046704902058888709, guid: 1b6d8f1438d64424690a03922348bb25,
     type: 3}
-  bleedingBarShift: -25
+  bleedingBarShift: -5
+  healthBarShift: 12
 --- !u!1 &1701342960178197750
 GameObject:
   m_ObjectHideFlags: 0

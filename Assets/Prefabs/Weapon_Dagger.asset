@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Dagger
   damagePerUse: 4.2
   damageRandomization: 0.075
-  reloadTimeSeconds: 0.45
+  reloadTimeSeconds: 0.4
   minDistance: 0
   maxDistance: 3
   critChange: 0.08

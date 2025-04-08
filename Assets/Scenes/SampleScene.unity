@@ -1283,21 +1283,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1701342960031030132, guid: 687e45f1558a39b4d87ee60b5b4effdf,
-        type: 3}
-      propertyPath: healthBarShift
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1701342960031030132, guid: 687e45f1558a39b4d87ee60b5b4effdf,
-        type: 3}
-      propertyPath: bleedingBarShift
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1701342960031030132, guid: 687e45f1558a39b4d87ee60b5b4effdf,
-        type: 3}
-      propertyPath: bleedingRestoreSpeed
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1701342960031030133, guid: 687e45f1558a39b4d87ee60b5b4effdf,
         type: 3}
       propertyPath: m_Name

@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using static UnityEngine.Rendering.DebugUI;
 
 public class HealthComp : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class HealthComp : MonoBehaviour
     /// Passed argument is the amount of damage taken.
     /// </summary>
     public event Action<float> onDamagedEvent;
-    public event Action<float> onBleedingEvent;
+    public event Action<float> onBleedingChangedEvent;
     public event Action onDiedEvent;
 
     [TitleGroup("Bleeding")]
@@ -63,7 +64,7 @@ public class HealthComp : MonoBehaviour
             UIBleedingBarInstance.GetComponent<RectTransform>().anchoredPosition += Vector2.up * bleedingBarShift;
             UIBleedingBarInstance.GetForegroundColor = (float value) => Color.Lerp(new Color(0.961f, 0.353f, 0.192f), new Color(0.729f, 0.153f, 0.118f), value);
             UIBleedingBarInstance.Init(bleedingProgress);
-            onBleedingEvent += UpdateBleedingUI;
+            onBleedingChangedEvent += UpdateBleedingUI;
         }
     }
 
@@ -71,7 +72,7 @@ public class HealthComp : MonoBehaviour
     {
         if (applyBleedingEffect)
         {
-            bleedingProgress = Mathf.Clamp01(bleedingProgress - bleedingRestoreSpeed * Time.deltaTime);
+            Unbleed(bleedingRestoreSpeed * Time.deltaTime);
         }
     }
 
@@ -92,7 +93,12 @@ public class HealthComp : MonoBehaviour
             currentBleedingDamageFactor = bleedingDamageFactor * powerFactor;
             bleedingProgress = 0.0f;
         }
-        onBleedingEvent?.Invoke(value);
+        onBleedingChangedEvent?.Invoke(value);
+    }
+    public virtual void Unbleed(float restoreValue)
+    {
+        this.bleedingProgress = Mathf.Clamp01(bleedingProgress - restoreValue);
+        onBleedingChangedEvent?.Invoke(restoreValue);
     }
 
     public virtual void TakeDamage(float value, float bleedingValue = 0.0f, float bleedingPowerFactor = 1.0f)
