@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
         playerCamera = GetComponent<PlayerCamera>();
         playerDash = GetComponent<PlayerDash>();
-        playerDash?.Init();
+        playerDash.Init();
 
         defaultPosition = transform.position;
         playerCamera.Init();
@@ -82,9 +82,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerDash) playerDash.UpdateDashing();
-
-        if (!playerDash.isDashing)
+        playerDash.UpdateDashing();
+        if (!playerDash.blockMovementWhenDashing || !playerDash.isDashing)
             UpdateMotion();
     }
 

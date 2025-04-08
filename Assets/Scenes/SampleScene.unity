@@ -1137,17 +1137,26 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 5.004191
-      outSlope: 5.004191
+      inSlope: 3.0995312
+      outSlope: 3.0995312
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.060079753
+      outWeight: 0.028953925
+    - serializedVersion: 3
+      time: 0.1745424
+      value: 0.5083315
+      inSlope: 2.0248818
+      outSlope: 2.0248818
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.13052703
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -1156,6 +1165,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   maxSlidingAngle: 45
+  blockMovementWhenDashing: 0
   isDashing: 0
 --- !u!136 &1560919536
 CapsuleCollider:
