@@ -342,7 +342,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 9.969, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -1025,6 +1025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1560919529}
   - component: {fileID: 1560919530}
+  - component: {fileID: 1560919534}
   - component: {fileID: 1560919533}
   - component: {fileID: 1560919532}
   - component: {fileID: 1560919531}
@@ -1061,7 +1062,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1560919528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a564f90e902894c4bb22f9ecfab485ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 04e41880c7dfc194e9caa476f5e6dde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   showAllValues: 1
@@ -1070,9 +1071,6 @@ MonoBehaviour:
   speedZ: 5
   inputHorizontal: 0
   inputVertical: 0
-  camera: {fileID: 330585545}
-  cameraFollowingMode: 2
-  cameraFollowingSpeed: 5
 --- !u!54 &1560919531
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1114,11 +1112,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1560919528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c878fc5c603cc214b95afbe1fc547b4e, type: 3}
+  m_Script: {fileID: 11500000, guid: 069698a234477614082cc76ba21b8300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeapon: {fileID: 303827696}
   key: 323
+--- !u!114 &1560919534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560919528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5946a23ef8fbf8d4d96bf584449e3023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 330585545}
+  cameraFollowingMode: 2
+  cameraFollowingSpeed: {x: 5, y: 0, z: 1.5}
 --- !u!1 &1562123122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,7 +1224,7 @@ PrefabInstance:
     - target: {fileID: 1701342960031030123, guid: 687e45f1558a39b4d87ee60b5b4effdf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1701342960031030123, guid: 687e45f1558a39b4d87ee60b5b4effdf,
         type: 3}
