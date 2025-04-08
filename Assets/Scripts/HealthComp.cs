@@ -20,33 +20,86 @@ public class HealthComp : MonoBehaviour
     /// Passed argument is the amount of damage taken.
     /// </summary>
     public event Action<float> onDamagedEvent;
+    public event Action<float> onBleedingEvent;
     public event Action onDiedEvent;
 
+    [TitleGroup("Bleeding")]
+    [SerializeField] private bool applyBleedingEffect = true;
+    [SerializeField][ShowIf("applyBleedingEffect")][ProgressBar(0.0f, 1.0f, r:1.0f, g:0.3f, b:0.25f)][ReadOnly] private float bleedingProgress = 0.0f;
+    [SerializeField][ShowIf("applyBleedingEffect")] private float bleedingDamageFactor = 3.0f;
+    private float currentBleedingDamageFactor = 1.0f;
+    [SerializeField][ShowIf("applyBleedingEffect")] private float bleedingRestoreSpeed = 0.1f;
+
     [TitleGroup("UI")]
-    [DisableInPlayMode] public bool doShowBar = true;
-    [DisableInPlayMode][ShowIf("doShowBar")][SerializeField] private Canvas canvas;
-    [DisableInPlayMode][ShowIf("doShowBar")][SerializeField][AssetsOnly] private UIBar UIBarPrefab;
-    private UIBar UIBarInstance;
+    [DisableInPlayMode] public bool doShowHealthBar = true;
+    [DisableInPlayMode][SerializeField][ShowIf("applyBleedingEffect")] private bool doShowBleedingBar = true;
+
+    [DisableInPlayMode][SerializeField][ShowIf("@doShowHealthBar || doShowBleedingBar")] private Canvas canvas;
+    [DisableInPlayMode][SerializeField][ShowIf("@doShowHealthBar || doShowBleedingBar")][AssetsOnly] private UIBar UIBarPrefab;
+
+    private UIBar UIHealthBarInstance;
+    private UIBar UIBleedingBarInstance;
+
+    [DisableInPlayMode][SerializeField][ShowIf("@applyBleedingEffect && doShowBleedingBar")] private float bleedingBarShift = -25f;
+    [DisableInPlayMode][SerializeField][ShowIf("doShowHealthBar")] private float healthBarShift = 0f;
 
     private void Awake()
     {
-        if (doShowBar)
+        if (doShowHealthBar)
         {
             Assert.IsNotNull(canvas);
             Assert.IsNotNull(UIBarPrefab);
-            UIBarInstance = Instantiate(UIBarPrefab, canvas.transform);
-            UIBarInstance.Init(GetHealth01());
-            onHealthChangedEvent += UpdateUI;
+            UIHealthBarInstance = Instantiate(UIBarPrefab, canvas.transform);
+            UIHealthBarInstance.GetComponent<RectTransform>().anchoredPosition += Vector2.up * healthBarShift;
+            UIHealthBarInstance.Init(GetHealth01());
+            onHealthChangedEvent += UpdateHealthUI;
+        }
+        if (applyBleedingEffect && doShowBleedingBar)
+        {
+            Assert.IsNotNull(canvas);
+            Assert.IsNotNull(UIBarPrefab);
+            UIBleedingBarInstance = Instantiate(UIBarPrefab, canvas.transform);
+            //UIBleedingBarInstance.transform.position += Vector3.down * bleedingBarShift;
+            UIBleedingBarInstance.GetComponent<RectTransform>().anchoredPosition += Vector2.up * bleedingBarShift;
+            UIBleedingBarInstance.GetForegroundColor = (float value) => Color.Lerp(new Color(0.961f, 0.353f, 0.192f), new Color(0.729f, 0.153f, 0.118f), value);
+            UIBleedingBarInstance.Init(bleedingProgress);
+            onBleedingEvent += UpdateBleedingUI;
         }
     }
 
-    private void UpdateUI(float diff)
+    private void Update()
     {
-        UIBarInstance.SetValue01(GetHealth01());
+        if (applyBleedingEffect)
+        {
+            bleedingProgress = Mathf.Clamp01(bleedingProgress - bleedingRestoreSpeed * Time.deltaTime);
+        }
     }
 
-    public virtual void TakeDamage(float value)
+    private void UpdateHealthUI(float diff)
     {
+        UIHealthBarInstance.SetValue01(GetHealth01());
+    }
+    private void UpdateBleedingUI(float diff)
+    {
+        UIBleedingBarInstance.SetValue01(bleedingProgress);
+    }
+
+    public virtual void Bleed(float value, float powerFactor = 1.0f)
+    {
+        this.bleedingProgress = Mathf.Clamp01(bleedingProgress + value);
+        if (bleedingProgress >= 1.0f)
+        {
+            currentBleedingDamageFactor = bleedingDamageFactor * powerFactor;
+            bleedingProgress = 0.0f;
+        }
+        onBleedingEvent?.Invoke(value);
+    }
+
+    public virtual void TakeDamage(float value, float bleedingValue = 0.0f, float bleedingPowerFactor = 1.0f)
+    {
+        Bleed(bleedingValue, bleedingPowerFactor);
+        value *= currentBleedingDamageFactor;
+        currentBleedingDamageFactor = 1.0f;
         SetHealth(AbsoluteHealth - value);
     }
 

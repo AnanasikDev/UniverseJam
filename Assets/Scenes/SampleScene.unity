@@ -1100,9 +1100,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   group: 1
-  doShowBar: 0
+  applyBleedingEffect: 0
+  bleedingProgress: 0
+  bleedingDamageFactor: 3
+  bleedingRestoreSpeed: 0.1
+  doShowHealthBar: 0
+  doShowBleedingBar: 1
   canvas: {fileID: 0}
   UIBarPrefab: {fileID: 0}
+  bleedingBarShift: -10
+  healthBarShift: 0
 --- !u!114 &1560919533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1274,6 +1281,21 @@ PrefabInstance:
     - target: {fileID: 1701342960031030123, guid: 687e45f1558a39b4d87ee60b5b4effdf,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701342960031030132, guid: 687e45f1558a39b4d87ee60b5b4effdf,
+        type: 3}
+      propertyPath: healthBarShift
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701342960031030132, guid: 687e45f1558a39b4d87ee60b5b4effdf,
+        type: 3}
+      propertyPath: bleedingBarShift
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701342960031030132, guid: 687e45f1558a39b4d87ee60b5b4effdf,
+        type: 3}
+      propertyPath: bleedingRestoreSpeed
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1701342960031030133, guid: 687e45f1558a39b4d87ee60b5b4effdf,

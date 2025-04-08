@@ -46,7 +46,7 @@ public class UIBar : MonoBehaviour
         float diff = Value - prevValue;
         if (diff == 0) return; // nothing changed;
 
-        foreground.transform.DOLocalMoveX(width * (Value - 1.0f), Mathf.Abs(diff));
+        foreground.transform.DOLocalMoveX(width * (Value - 1.0f), Mathf.Sqrt(Mathf.Abs(diff)));
         if (doAnimateForegroundColor) foreground.color = GetForegroundColor(Value);
     }
 }

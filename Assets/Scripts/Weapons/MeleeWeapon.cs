@@ -12,7 +12,7 @@ public class MeleeWeapon : BaseWeapon
         {
             if (entity.group != targetHealthGroup) continue;
 
-            entity.TakeDamage(CalculateDamage().finalDamage);
+            entity.TakeDamage(CalculateDamage().finalDamage, data.bleedingSpeedFactor, data.bleedingPowerFactor);
         }
     }
 }
