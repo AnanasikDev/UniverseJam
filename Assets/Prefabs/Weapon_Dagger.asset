@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Weapon_Dagger
   m_EditorClassIdentifier: 
   name: Dagger
-  damagePerUse: 4.2
+  damagePerUse: 3
   damageRandomization: 0.075
-  reloadTimeSeconds: 0.4
+  reloadTimeSeconds: 0.21
   minDistance: 0
   maxDistance: 3
-  angle: 55
+  angle: 150
   critChange: 0.08
   critFactor: 3
   bleedingSpeedFactor: 0.12
-  bleedingPowerFactor: 1.7
+  bleedingPowerFactor: 3
