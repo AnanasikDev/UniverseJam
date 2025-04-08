@@ -10,6 +10,7 @@ public class WeaponData : ScriptableObject
 
     [Range(0, 5)] public float minDistance = 0;
     [Range(0, 12)] public float maxDistance = 12;
+    [Range(0, 360)] public float angle = 90;
 
     [Range(0, 1)] public float critChange = 0.08f;
     [Range(0, 10)] public float critFactor = 3;

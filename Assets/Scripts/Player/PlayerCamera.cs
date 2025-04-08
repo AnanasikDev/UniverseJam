@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField][Required] private new Camera camera;
+    [Required] public new Camera camera;
     [SerializeField][OnValueChanged("SetCameraFollowingMode")] private CameraFollowingMode cameraFollowingMode = CameraFollowingMode.Following;
     [SerializeField][ShowIf("cameraFollowingMode", CameraFollowingMode.Following)] private Vector3 cameraFollowingSpeed = new Vector3(5.0f, 0.0f, 1.5f);
     private Func<Vector3> GetCameraPosition = null;

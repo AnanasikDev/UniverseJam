@@ -24,6 +24,12 @@ public class PlayerController : MonoBehaviour
     public Vector3 deltaPositionSinceStart { get { return transform.position - defaultPosition; } }
     public Vector3 deltaPosition { get { return transform.position - lastPosition; } }
 
+    /// <summary>
+    /// Direction of cursor relative to the player
+    /// </summary>
+    public Vector3 cursorDirection = new Vector3(1, 0, 0);
+    public Vector2 cursorDirection2D = new Vector2(1, 0);
+
     private new Rigidbody rigidbody;
     private PlayerAttack playerAttack;
     private PlayerCamera playerCamera;
@@ -62,6 +68,8 @@ public class PlayerController : MonoBehaviour
     {
         inputHorizontal = GetMovementInput("Horizontal");
         inputVertical = GetMovementInput("Vertical");
+        cursorDirection2D = Input.mousePosition - playerCamera.camera.WorldToScreenPoint(transform.position);
+        cursorDirection = new Vector3(cursorDirection2D.x, 0, cursorDirection2D.y);
         playerAttack.UpdateAttack();
         playerCamera.UpdateCamera();
     }
@@ -77,5 +85,10 @@ public class PlayerController : MonoBehaviour
 
         rigidbody.MovePosition(transform.position + new Vector3(inputHorizontal * speedX, 0, inputVertical * speedZ) * Time.fixedDeltaTime);
         lastPosition = transform.position;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position, cursorDirection);
     }
 }

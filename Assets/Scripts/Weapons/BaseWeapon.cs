@@ -12,6 +12,8 @@ public abstract class BaseWeapon : MonoBehaviour
         return Time.time - lastTimeUsed > data.reloadTimeSeconds;
     }
 
+    public abstract bool IsPointReachable(Vector3 point);
+
     public virtual void Use()
     {
         lastTimeUsed = Time.time;
@@ -29,7 +31,7 @@ public abstract class BaseWeapon : MonoBehaviour
         return new WeaponHitInfo(damage, isCrit);
     }
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Vector3 position = Application.isPlaying ? PlayerController.instance.transform.position : transform.position;
 

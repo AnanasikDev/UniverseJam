@@ -18,6 +18,7 @@ MonoBehaviour:
   reloadTimeSeconds: 0.4
   minDistance: 0
   maxDistance: 3
+  angle: 55
   critChange: 0.08
   critFactor: 3
   bleedingSpeedFactor: 0.12
