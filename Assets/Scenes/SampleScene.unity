@@ -218,8 +218,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10.000005, y: 0.1, z: 10}
-  m_Center: {x: -2.1316282e-14, y: -0.05, z: -0.00000047683716}
+  m_Size: {x: 10.000005, y: 0.02, z: 10}
+  m_Center: {x: -2.1316282e-14, y: -0.01, z: -0.00000047683716}
 --- !u!1 &303827694
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 303827695}
   - component: {fileID: 303827696}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Dagger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,8 +831,7 @@ GameObject:
   - component: {fileID: 1292502269}
   - component: {fileID: 1292502272}
   - component: {fileID: 1292502271}
-  - component: {fileID: 1292502270}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -854,20 +853,6 @@ Transform:
   m_Father: {fileID: 1560919529}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1292502270
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1292502268}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1292502271
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -929,8 +914,7 @@ GameObject:
   - component: {fileID: 1355629941}
   - component: {fileID: 1355629944}
   - component: {fileID: 1355629943}
-  - component: {fileID: 1355629942}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -946,25 +930,12 @@ Transform:
   m_GameObject: {fileID: 1355629940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.056, z: -0.89}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 303827695}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1355629942
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355629940}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1355629943
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1028,8 +999,10 @@ GameObject:
   - component: {fileID: 1560919534}
   - component: {fileID: 1560919533}
   - component: {fileID: 1560919532}
+  - component: {fileID: 1560919535}
   - component: {fileID: 1560919531}
-  m_Layer: 0
+  - component: {fileID: 1560919536}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1071,6 +1044,9 @@ MonoBehaviour:
   speedZ: 5
   inputHorizontal: 0
   inputVertical: 0
+  movementDirection: {x: 0, y: 0, z: 0}
+  cursorDirection: {x: 0, y: 0, z: 0}
+  cursorDirection2D: {x: 1, y: 0}
 --- !u!54 &1560919531
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1139,6 +1115,62 @@ MonoBehaviour:
   camera: {fileID: 330585545}
   cameraFollowingMode: 2
   cameraFollowingSpeed: {x: 5, y: 0, z: 1.5}
+--- !u!114 &1560919535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560919528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f54c13248828c6418f6b25b7d15ef71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashKey: 32
+  dashDelaySeconds: 0
+  dashSpeed: 18
+  dashDistance: 3
+  dashSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 5.004191
+      outSlope: 5.004191
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.060079753
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxSlidingAngle: 45
+  isDashing: 0
+--- !u!136 &1560919536
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560919528}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.01, z: 0}
 --- !u!1 &1562123122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,6 +1319,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701342960031030133, guid: 687e45f1558a39b4d87ee60b5b4effdf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 687e45f1558a39b4d87ee60b5b4effdf, type: 3}

@@ -23,16 +23,19 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Vector3 defaultPosition { get; private set; }
     public Vector3 deltaPositionSinceStart { get { return transform.position - defaultPosition; } }
     public Vector3 deltaPosition { get { return transform.position - lastPosition; } }
+    public Vector3 movementDirection;
 
+    [TitleGroup("Cursor")]
     /// <summary>
     /// Direction of cursor relative to the player
     /// </summary>
-    public Vector3 cursorDirection = new Vector3(1, 0, 0);
-    public Vector2 cursorDirection2D = new Vector2(1, 0);
+    [ReadOnly] public Vector3 cursorDirection = new Vector3(1, 0, 0);
+    [ReadOnly] public Vector2 cursorDirection2D = new Vector2(1, 0);
 
     private new Rigidbody rigidbody;
     private PlayerAttack playerAttack;
     private PlayerCamera playerCamera;
+    private PlayerDash playerDash;
     public static PlayerController instance { get; private set; }
 
     private void Awake()
@@ -57,7 +60,9 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         playerAttack = GetComponent<PlayerAttack>();
         playerCamera = GetComponent<PlayerCamera>();
-        
+        playerDash = GetComponent<PlayerDash>();
+        playerDash?.Init();
+
         defaultPosition = transform.position;
         playerCamera.Init();
 
@@ -70,21 +75,29 @@ public class PlayerController : MonoBehaviour
         inputVertical = GetMovementInput("Vertical");
         cursorDirection2D = Input.mousePosition - playerCamera.camera.WorldToScreenPoint(transform.position);
         cursorDirection = new Vector3(cursorDirection2D.x, 0, cursorDirection2D.y);
+
         playerAttack.UpdateAttack();
         playerCamera.UpdateCamera();
     }
 
     private void FixedUpdate()
     {
-        UpdateMotion();
+        if (playerDash) playerDash.UpdateDashing();
+
+        if (!playerDash.isDashing)
+            UpdateMotion();
     }
 
     private void UpdateMotion()
     {
-        if (IsIdle) return;
-
-        rigidbody.MovePosition(transform.position + new Vector3(inputHorizontal * speedX, 0, inputVertical * speedZ) * Time.fixedDeltaTime);
-        lastPosition = transform.position;
+        if (IsMoving)
+        {
+            //rigidbody.MovePosition(transform.position + new Vector3(inputHorizontal * speedX, 0, inputVertical * speedZ) * Time.fixedDeltaTime);
+            rigidbody.position = rigidbody.position + new Vector3(inputHorizontal * speedX, 0, inputVertical * speedZ) * Time.fixedDeltaTime;
+            transform.position = rigidbody.position;
+            movementDirection = (transform.position - lastPosition).normalized;
+            lastPosition = transform.position;
+        }
     }
 
     private void OnDrawGizmos()

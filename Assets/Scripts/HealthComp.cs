@@ -2,7 +2,6 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
-using static UnityEngine.Rendering.DebugUI;
 
 public class HealthComp : MonoBehaviour
 {
@@ -26,10 +25,10 @@ public class HealthComp : MonoBehaviour
 
     [TitleGroup("Bleeding")]
     [SerializeField] private bool applyBleedingEffect = true;
-    [SerializeField][ShowIf("applyBleedingEffect")][ProgressBar(0.0f, 1.0f, r:1.0f, g:0.3f, b:0.25f)][ReadOnly] private float bleedingProgress = 0.0f;
-    [SerializeField][ShowIf("applyBleedingEffect")] private float bleedingDamageFactor = 3.0f;
+    [SerializeField][ShowIf("applyBleedingEffect")][ProgressBar(0.0f, 1.0f, r: 1.0f, g: 0.3f, b: 0.25f)][ReadOnly] private float bleedingProgress = 0.0f;
+    [SerializeField][ShowIf("applyBleedingEffect")][Range(1, 5)] private float bleedingDamageFactor = 3.0f;
     private float currentBleedingDamageFactor = 1.0f;
-    [SerializeField][ShowIf("applyBleedingEffect")] private float bleedingRestoreSpeed = 0.1f;
+    [SerializeField][ShowIf("applyBleedingEffect")][Range(0, 0.5f)] private float bleedingRestoreSpeed = 0.1f;
 
     [TitleGroup("UI")]
     [DisableInPlayMode] public bool doShowHealthBar = true;

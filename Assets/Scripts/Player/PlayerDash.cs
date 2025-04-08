@@ -1,0 +1,132 @@
+using Sirenix.OdinInspector;
+using System;
+using UnityEngine;
+using UnityEngine.Assertions;
+
+public class PlayerDash : MonoBehaviour
+{
+    [SerializeField] private KeyCode dashKey = KeyCode.Space;
+    [SerializeField][Range(0, 4)] private float dashDelaySeconds = 1.0f;
+    [SerializeField] private float dashSpeed = 4.0f; //[Range(0.01f, 10)]
+    [SerializeField][Range(0, 7)] private float dashDistance = 3.0f;
+    [SerializeField] private AnimationCurve dashSpeedCurve;
+    [SerializeField][Range(0, 90)] private float maxSlidingAngle = 45;
+    private float currentSpeed { get { return dashSpeedCurve.Evaluate(dashProgress01) * dashSpeed; } }
+    [ShowInInspector] private float dashTime { get { return dashDistance / dashSpeed; } }
+    private float lastTimeDashed = -10.0f;
+    [ReadOnly] public bool isDashing = false;
+    private Vector3 dashStartPosition;
+    private Vector3 dashTargetPosition;
+    private Vector3 dashDirection;
+    private float dashProgress01 { get { return (Time.time - lastTimeDashed) / dashTime; } }
+
+    private new Rigidbody rigidbody;
+
+    public void Init()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+        Assert.IsNotNull(rigidbody);
+    }
+
+    private void Update()
+    {
+        if (Time.time - lastTimeDashed > dashTime + dashDelaySeconds)
+        {
+            bool wasDashing = isDashing;
+            isDashing = Input.GetKeyDown(dashKey);
+            if (!wasDashing && isDashing)
+            {
+                StartDashing();
+            }
+        }
+        if (Time.time - lastTimeDashed > dashTime && isDashing)
+        {
+            StopDashing();
+        }
+    }
+
+    private void StartDashing()
+    {
+        dashStartPosition = transform.position;
+        dashTargetPosition = transform.position + PlayerController.instance.movementDirection * dashDistance; //PlayerController.instance.deltaPosition.normalized
+        lastTimeDashed = Time.time;
+        dashDirection = (dashTargetPosition - dashStartPosition).normalized;
+        dashDirection.y = 0;
+        Debug.DrawLine(rigidbody.position, dashTargetPosition, Color.white, 3f);
+    }
+
+    private void StopDashing()
+    {
+        isDashing = false;
+
+    }
+
+    public void UpdateDashing()
+    {
+        if (!isDashing) return;
+
+        //Vector3 newPos = Vector3.Lerp(rigidbody.position, dashTargetPosition, currentSpeed);
+        Vector3 newPos = rigidbody.position + dashDirection * currentSpeed * Time.fixedDeltaTime;
+        Debug.DrawLine(rigidbody.position, newPos, Color.blue, 0.25f);
+        //bool isObscured = rigidbody.SweepTest(dashDirection, out RaycastHit hitInfo, currentSpeed * Time.fixedDeltaTime, QueryTriggerInteraction.Ignore); //(1.0f - dashProgress01) * dashDistance
+        //rigidbody.MovePosition(newPos);
+        bool isObscured = Physics.SphereCast(rigidbody.position + Vector3.up * 0.5f - dashDirection * 0.1f, 0.5f, dashDirection, out RaycastHit hitInfo, Mathf.Clamp(currentSpeed * Time.fixedDeltaTime, 0.1f, 10.0f), 1 << 0, QueryTriggerInteraction.Ignore);
+
+
+        if (!isObscured)
+        {
+            //dashTargetPosition = rigidbody.position + dashDirection * Mathf.Clamp(hitInfo.distance - 0.25f, 0, dashDistance);
+            rigidbody.position = newPos;
+            transform.position = rigidbody.position;
+        }
+        else
+        {
+
+            Debug.Log("OBSCURED");
+            float playerRadius = 0.5f;
+            float dot = Vector3.Dot(dashDirection, -hitInfo.normal);
+            
+            float angleToSurfaceRad = Mathf.PI / 2.0f - Mathf.Acos(dot); //Mathf.PI / 2.0f - 
+            float angleToSurfaceDeg = angleToSurfaceRad * Mathf.Rad2Deg;
+
+            Vector3 orthogonal = new Vector3(-hitInfo.normal.z, 0, hitInfo.normal.x);
+            float orthogonalDirectionSign = Mathf.Sign(Vector3.Cross(dashDirection, hitInfo.normal).y);
+
+            print(angleToSurfaceDeg + " " + orthogonal + " " + orthogonalDirectionSign);
+
+            if (angleToSurfaceDeg > maxSlidingAngle)
+            {
+                StopDashing();
+                return;
+            }
+
+            Vector3 prevTargetPos = dashTargetPosition;
+            dashTargetPosition = rigidbody.position + (4) * orthogonal * orthogonalDirectionSign;
+            print("Target was " + prevTargetPos + " Now is " + dashTargetPosition + " | Changed by " + (dashTargetPosition - prevTargetPos));
+            Debug.DrawLine(rigidbody.position, dashTargetPosition, Color.red, 3f);
+            dashDirection = (dashTargetPosition - rigidbody.position).normalized;
+            dashDirection.y = 0;
+
+            return;
+
+            /*float playerRadius = 0.5f * 0.98f;
+            float dot = Vector3.Dot(dashDirection, hitInfo.normal);
+            float angle = -Mathf.PI / 2.0f - Mathf.Acos(dot);
+            Vector3 orthogonal = new Vector3(-hitInfo.normal.z, 0, hitInfo.normal.x);
+
+            float x = playerRadius / Mathf.Tan(angle);
+
+            float sign = Mathf.Sign(Vector3.Cross(dashDirection, hitInfo.normal).y);
+            Vector3 point = new Vector3(hitInfo.point.x, rigidbody.position.y, hitInfo.point.z);
+            print(angle * Mathf.Rad2Deg + " normal " + hitInfo.normal + " x shift=" + sign * orthogonal * x + " z shift=" + hitInfo.normal * playerRadius);
+            rigidbody.position = point + sign * orthogonal * x + hitInfo.normal * playerRadius;
+            //float dist = playerRadius / Mathf.Sin(angle);
+            //rigidbody.position += dashDirection * Mathf.Clamp(hitInfo.distance - dist, 0, dashDistance);
+            //rigidbody.position = hitInfo.point - dashDirection * dist;
+            StopDashing();*/
+        }
+
+
+        return;
+    }
+}
