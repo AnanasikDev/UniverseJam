@@ -11,7 +11,7 @@ namespace Enemies
 
         public ChaseState(EnemyAI self) : base(self)
         {
-
+            this.type = StateEnum.Chase;
         }
 
         public override bool CanChangeFrom()
@@ -36,7 +36,13 @@ namespace Enemies
 
         public override void OnUpdate()
         {
-            
+            self.transform.position += (PlayerController.instance.transform.position - self.transform.position).normalized * self.settings.movementSpeed * Time.deltaTime;
+        }
+
+        public override void DrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(self.transform.position, self.settings.maxChaseDistance);
         }
     }
 }

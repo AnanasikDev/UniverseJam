@@ -9,9 +9,11 @@ namespace Enemies
         /// </summary>
         public static int totalStatesActive = 0;
 
+        private float lastHitTime;
+
         public AttackState(EnemyAI self) : base(self)
         {
-
+            this.type = StateEnum.Attack;
         }
 
         public override bool CanChangeFrom()
@@ -36,7 +38,22 @@ namespace Enemies
 
         public override void OnUpdate()
         {
-            
+            if (Time.time - lastHitTime >= self.settings.hitIntervalSeconds)
+            {
+                lastHitTime = Time.time;
+                Hit();
+            }
+        }
+
+        private void Hit()
+        {
+            PlayerController.instance.healthComp.TakeDamage(self.settings.damagePerHit);
+        }
+
+        public override void DrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(self.transform.position, self.settings.maxAttackDistance);
         }
     }
 }

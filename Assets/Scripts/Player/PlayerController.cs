@@ -36,11 +36,19 @@ public class PlayerController : MonoBehaviour
     private PlayerAttack playerAttack;
     private PlayerCamera playerCamera;
     private PlayerDash playerDash;
+    [HideInInspector] public HealthComp healthComp;
+
     public static PlayerController instance { get; private set; }
 
     private void Awake()
     {
         instance = this;
+
+        rigidbody = GetComponent<Rigidbody>();
+        playerAttack = GetComponent<PlayerAttack>();
+        playerCamera = GetComponent<PlayerCamera>();
+        playerDash = GetComponent<PlayerDash>();
+        healthComp = GetComponent<HealthComp>();
     }
 
     private void SetMovementInputFunction()
@@ -57,10 +65,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        playerAttack = GetComponent<PlayerAttack>();
-        playerCamera = GetComponent<PlayerCamera>();
-        playerDash = GetComponent<PlayerDash>();
         playerDash.Init();
 
         defaultPosition = transform.position;

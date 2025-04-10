@@ -16,6 +16,8 @@ namespace Enemies
 
         public abstract bool CanChangeFrom();
         public abstract bool CanChangeTo();
+
+        public virtual void DrawGizmos() { }
     }
 
     public enum StateEnum

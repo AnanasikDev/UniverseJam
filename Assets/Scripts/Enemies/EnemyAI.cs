@@ -1,4 +1,5 @@
 using Enemies;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -7,6 +8,8 @@ public class EnemyAI : MonoBehaviour
 
     public BehaviourSettings settings;
     public StateMachine stateMachine;
+
+    [ShowInInspector] public StateEnum currentState { get { return stateMachine?.currentState.type ?? StateEnum.Idle; } }
 
     private void Start()
     {

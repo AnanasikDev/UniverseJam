@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
 namespace Enemies
 {
@@ -18,7 +17,8 @@ namespace Enemies
             enum2state = new Dictionary<StateEnum, State>()
             {
                 { StateEnum.Idle,  new IdleState(self)  },
-                { StateEnum.Chase, new ChaseState(self) }
+                { StateEnum.Chase, new ChaseState(self) },
+                { StateEnum.Attack, new AttackState(self) }
             };
 
             stateTree = new Dictionary<StateEnum, List<Transition>>()
@@ -30,25 +30,17 @@ namespace Enemies
                 },
                 { StateEnum.Chase, new List<Transition>()
                     {
-                        new Transition(StateEnum.Chase, StateEnum.Attack, () => AttackState.totalStatesActive < self.settings.maxAttackingEnemies)
+                        new Transition(StateEnum.Chase, StateEnum.Attack, () => AttackState.totalStatesActive < self.settings.maxAttackingEnemies),
+                        new Transition(StateEnum.Chase, StateEnum.Idle, () => (PlayerController.instance.transform.position - self.transform.position).magnitude > self.settings.maxChaseDistance)
                     }
                 },
                 { StateEnum.Attack, new List<Transition>()
                     {
-                        new Transition(StateEnum.Attack, StateEnum.Chase, () => true)
-                    }
-                },
-                { StateEnum.Attack, new List<Transition>()
-                    {
+                        new Transition(StateEnum.Attack, StateEnum.Chase, () => true),
                         new Transition(StateEnum.Attack, StateEnum.Idle, () => true)
                     }
                 }
             };
-
-           /* stateTree = new Dictionary<StateEnum, List<StateEnum>>()
-            {
-                { StateEnum.Idle, new List<StateEnum>() { StateEnum.Chase } }
-            };*/
 
             currentState = enum2state[StateEnum.Idle];
             currentState.OnEnter();
@@ -59,7 +51,8 @@ namespace Enemies
             if (GetNextState(out StateEnum state))
             {
                 currentState.OnExit();
-                enum2state[state].OnEnter();
+                currentState = enum2state[state];
+                currentState.OnEnter();
             }
 
             currentState.OnUpdate();
@@ -80,25 +73,6 @@ namespace Enemies
 
             state = StateEnum.Idle;
             return false;
-
-            /*switch (currentState.type)
-            {
-                case StateEnum.Idle:
-                    {
-
-                    }
-                    break;
-                case StateEnum.Chase:
-                    {
-
-                    }
-                    break;
-                default:
-                    {
-                        
-                    }
-                    break;
-            }*/
         }
     }
 }

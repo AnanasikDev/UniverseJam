@@ -11,7 +11,7 @@ namespace Enemies
 
         public IdleState(EnemyAI self) : base(self)
         {
-
+            this.type = StateEnum.Idle;
         }
 
         public override bool CanChangeFrom()
@@ -36,7 +36,6 @@ namespace Enemies
 
         public override void OnUpdate()
         {
-            
         }
     }
 }
