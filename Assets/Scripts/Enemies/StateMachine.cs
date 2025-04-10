@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Enemies
 {
@@ -16,34 +17,50 @@ namespace Enemies
             this.self = self;
             enum2state = new Dictionary<StateEnum, State>()
             {
-                { StateEnum.Idle,  new IdleState(self)  },
-                { StateEnum.Chase, new ChaseState(self) },
-                { StateEnum.Attack, new AttackState(self) }
+                { StateEnum.Idle,    new IdleState(self)    },
+                { StateEnum.Chase,   new ChaseState(self)    },
+                { StateEnum.Attack,  new AttackState(self)  },
+                { StateEnum.Stealth, new StealthState(self) },
+                { StateEnum.Flee,    new FleeState(self)    },
             };
 
             stateTree = new Dictionary<StateEnum, List<Transition>>()
             {
                 { StateEnum.Idle, new List<Transition>() 
                     {   
-                        new Transition(StateEnum.Idle, StateEnum.Chase, () => true) 
+                        new Transition(StateEnum.Idle, StateEnum.Chase) 
                     } 
                 },
                 { StateEnum.Chase, new List<Transition>()
                     {
-                        new Transition(StateEnum.Chase, StateEnum.Attack, () => AttackState.totalStatesActive < self.settings.maxAttackingEnemies),
-                        new Transition(StateEnum.Chase, StateEnum.Idle, () => (PlayerController.instance.transform.position - self.transform.position).magnitude > self.settings.maxChaseDistance)
+                        new Transition(StateEnum.Chase, StateEnum.Attack),
+                        new Transition(StateEnum.Chase, StateEnum.Idle),
+                        new Transition(StateEnum.Chase, StateEnum.Stealth),
                     }
                 },
                 { StateEnum.Attack, new List<Transition>()
                     {
-                        new Transition(StateEnum.Attack, StateEnum.Chase, () => true),
-                        new Transition(StateEnum.Attack, StateEnum.Idle, () => true)
+                        new Transition(StateEnum.Attack, StateEnum.Chase),
+                        new Transition(StateEnum.Attack, StateEnum.Idle)
+                    }
+                },
+                { StateEnum.Stealth, new List<Transition>()
+                    {
+                        new Transition(StateEnum.Stealth, StateEnum.Chase),
+                        new Transition(StateEnum.Stealth, StateEnum.Attack)
+                    }
+                },
+                { StateEnum.Flee, new List<Transition>()
+                    {
+                        //new Transition(StateEnum.Flee, StateEnum.Chase),
+                        //new Transition(StateEnum.Flee, StateEnum.Idle),
                     }
                 }
             };
 
             currentState = enum2state[StateEnum.Idle];
             currentState.OnEnter();
+            OnStateChanged();
         }
 
         public void Update()
@@ -51,8 +68,10 @@ namespace Enemies
             if (GetNextState(out StateEnum state))
             {
                 currentState.OnExit();
+                Debug.Log($"Transition from {currentState.type} to {state}");
                 currentState = enum2state[state];
                 currentState.OnEnter();
+                OnStateChanged();
             }
 
             currentState.OnUpdate();
@@ -62,9 +81,9 @@ namespace Enemies
         {
             foreach (Transition transition in stateTree[currentState.type])
             {
-                if (transition.Condition() && 
-                    enum2state[transition.from].CanChangeFrom() && 
-                    enum2state[transition.to].CanChangeTo())
+                if (transition.Condition(currentState) && 
+                    enum2state[transition.from].IsPossibleChangeFrom() && 
+                    enum2state[transition.to].IsPossibleChangeTo())
                 {
                     state = transition.to;
                     return true;
@@ -73,6 +92,11 @@ namespace Enemies
 
             state = StateEnum.Idle;
             return false;
+        }
+
+        private void OnStateChanged()
+        {
+            self.ChangeState(currentState.type);
         }
     }
 }

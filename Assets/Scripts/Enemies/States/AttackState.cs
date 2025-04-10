@@ -16,18 +16,19 @@ namespace Enemies
             this.type = StateEnum.Attack;
         }
 
-        public override bool CanChangeFrom()
+        public override bool IsPossibleChangeFrom()
         {
-            return true;
+            return activeTime > 1;
         }
 
-        public override bool CanChangeTo()
+        public override bool IsPossibleChangeTo()
         {
-            return (PlayerController.instance.transform.position - self.transform.position).magnitude <= self.settings.maxAttackDistance;
+            return AttackState.totalStatesActive < self.settings.maxAttackingEnemies && (PlayerController.instance.transform.position - self.transform.position).magnitude <= self.settings.maxAttackDistance;
         }
 
         public override void OnEnter()
         {
+            base.OnEnter();
             totalStatesActive++;
         }
 

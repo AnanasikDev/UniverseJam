@@ -6,13 +6,17 @@ namespace Enemies
     {
         public StateEnum from;
         public StateEnum to;
-        public Func<bool> Condition;
+        public Func<State, bool> Condition;
 
-        public Transition(StateEnum from, StateEnum to, Func<bool> extraCondition)
+        public Transition(StateEnum from, StateEnum to, Func<State, bool> specificCondition = null)
         {
             this.from = from;
             this.to = to;
-            Condition = extraCondition;
+            if (specificCondition == null)
+            {
+                specificCondition = (State state) => true;
+            }
+            Condition = specificCondition;
         }
     }
 }

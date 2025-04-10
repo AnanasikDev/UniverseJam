@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef1145973e9cfb49b1b363981186a2c, type: 3}
   m_Name: BehSettings_1
   m_EditorClassIdentifier: 
-  maxAttackingEnemies: 2
+  maxAttackingEnemies: 3
+  maxChasingEnemies: 3
   maxChaseDistance: 5
   maxAttackDistance: 2
+  minAttackDistance: 1.5
   movementSpeed: 2
+  damagePerHit: 20
+  hitIntervalSeconds: 1

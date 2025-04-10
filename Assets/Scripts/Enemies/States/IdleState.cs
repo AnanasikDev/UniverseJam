@@ -14,18 +14,19 @@ namespace Enemies
             this.type = StateEnum.Idle;
         }
 
-        public override bool CanChangeFrom()
+        public override bool IsPossibleChangeFrom()
         {
             return true;
         }
 
-        public override bool CanChangeTo()
+        public override bool IsPossibleChangeTo()
         {
-            return true;
+            return (PlayerController.instance.transform.position - self.transform.position).magnitude > self.settings.maxChaseDistance;
         }
 
         public override void OnEnter()
         {
+            base.OnEnter();
             totalStatesActive++;
         }
 

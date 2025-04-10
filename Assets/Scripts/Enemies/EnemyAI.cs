@@ -1,5 +1,6 @@
 using Enemies;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -8,6 +9,8 @@ public class EnemyAI : MonoBehaviour
 
     public BehaviourSettings settings;
     public StateMachine stateMachine;
+
+    [SerializeField] private new MeshRenderer renderer;
 
     [ShowInInspector] public StateEnum currentState { get { return stateMachine?.currentState.type ?? StateEnum.Idle; } }
 
@@ -22,6 +25,20 @@ public class EnemyAI : MonoBehaviour
 
         stateMachine = new StateMachine();
         stateMachine.Init(this);
+    }
+
+    public void ChangeState(StateEnum state)
+    {
+        var getclr = new Dictionary<StateEnum, Color>()
+        {
+            { StateEnum.Idle, Color.green },
+            { StateEnum.Chase, Color.blue },
+            { StateEnum.Attack, Color.red },
+            { StateEnum.Stealth, Color.magenta },
+            { StateEnum.Flee, Color.yellow },
+        };
+
+        renderer.material.color = getclr[state];
     }
 
     private void Update()

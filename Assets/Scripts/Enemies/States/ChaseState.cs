@@ -14,18 +14,19 @@ namespace Enemies
             this.type = StateEnum.Chase;
         }
 
-        public override bool CanChangeFrom()
+        public override bool IsPossibleChangeFrom()
         {
-            return true;
+            return activeTime > 1;
         }
 
-        public override bool CanChangeTo()
+        public override bool IsPossibleChangeTo()
         {
-            return (PlayerController.instance.transform.position - self.transform.position).magnitude <= self.settings.maxChaseDistance;
+            return (PlayerController.instance.transform.position - self.transform.position).magnitude < self.settings.maxChaseDistance;
         }
 
         public override void OnEnter()
         {
+            base.OnEnter();
             totalStatesActive++;
         }
 
@@ -36,7 +37,11 @@ namespace Enemies
 
         public override void OnUpdate()
         {
-            self.transform.position += (PlayerController.instance.transform.position - self.transform.position).normalized * self.settings.movementSpeed * Time.deltaTime;
+            Vector3 vec = (PlayerController.instance.transform.position - self.transform.position);
+
+            float sign = vec.magnitude > self.settings.minAttackDistance ? 1 : -1;
+
+            self.transform.position += vec.normalized * sign * self.settings.movementSpeed * Time.deltaTime;
         }
 
         public override void DrawGizmos()

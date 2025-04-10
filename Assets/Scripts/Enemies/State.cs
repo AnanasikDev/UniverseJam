@@ -1,21 +1,25 @@
-using System;
-
 namespace Enemies
 {
     public abstract class State
     {
         public StateEnum type;
         protected EnemyAI self;
+        private float startTime = 0;
+        public float activeTime { get { return UnityEngine.Time.time - startTime; } }
+
         public State(EnemyAI self)
         {
             this.self = self;
         }
-        public abstract void OnEnter();
+        public virtual void OnEnter()
+        {
+            startTime = UnityEngine.Time.time;
+        }
         public abstract void OnExit();
         public abstract void OnUpdate();
 
-        public abstract bool CanChangeFrom();
-        public abstract bool CanChangeTo();
+        public abstract bool IsPossibleChangeFrom();
+        public abstract bool IsPossibleChangeTo();
 
         public virtual void DrawGizmos() { }
     }
@@ -25,6 +29,7 @@ namespace Enemies
         Idle,
         Chase,
         Attack,
-        Stealth
+        Stealth,
+        Flee
     }
 }
