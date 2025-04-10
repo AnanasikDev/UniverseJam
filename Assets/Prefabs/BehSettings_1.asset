@@ -16,6 +16,9 @@ MonoBehaviour:
   maxChasingEnemies: 3
   maxStealthEnemies: 2
   maxFleeingEnemies: 1
+  useFlee: 1
+  useStealth: 1
+  useWander: 1
   maxChaseDistance: 9
   movementSpeed: 2
   maxAttackDistance: 2
@@ -29,3 +32,6 @@ MonoBehaviour:
   stealthSpeed: 1.7
   stealthDurationSeconds: 1.75
   stealthChance: 30
+  wanderRandomDistance: {x: 6, y: 15}
+  wanderSpeed: 1.2
+  wanderChance: 40

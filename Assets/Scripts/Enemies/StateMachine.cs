@@ -18,17 +18,20 @@ namespace Enemies
             enum2state = new Dictionary<StateEnum, State>()
             {
                 { StateEnum.Idle,    new IdleState(self)    },
-                { StateEnum.Chase,   new ChaseState(self)    },
+                { StateEnum.Chase,   new ChaseState(self)   },
                 { StateEnum.Attack,  new AttackState(self)  },
                 { StateEnum.Stealth, new StealthState(self) },
                 { StateEnum.Flee,    new FleeState(self)    },
+                { StateEnum.Wander,  new WanderState(self)  },
             };
 
             stateTree = new Dictionary<StateEnum, List<Transition>>()
             {
                 { StateEnum.Idle, new List<Transition>() 
                     {   
-                        new Transition(StateEnum.Idle, StateEnum.Chase) 
+                        new Transition(StateEnum.Idle, StateEnum.Chase), 
+                        new Transition(StateEnum.Idle, StateEnum.Wander, 
+                            (State state) => self.vec2player.magnitude > self.settings.maxChaseDistance * 1.5f && Random.Range(0.0f, 1.0f) < (self.settings.wanderChance / 100.0f))
                     } 
                 },
                 { StateEnum.Chase, new List<Transition>()
@@ -54,7 +57,13 @@ namespace Enemies
                 { StateEnum.Flee, new List<Transition>()
                     {
                         new Transition(StateEnum.Flee, StateEnum.Chase),
-                        new Transition(StateEnum.Flee, StateEnum.Idle),
+                        new Transition(StateEnum.Flee, StateEnum.Idle)
+                    }
+                },
+                { StateEnum.Wander, new List<Transition>()
+                    {
+                        new Transition(StateEnum.Wander, StateEnum.Idle, (State state) => state.activeTime > 5),
+                        new Transition(StateEnum.Wander, StateEnum.Chase)
                     }
                 }
             };

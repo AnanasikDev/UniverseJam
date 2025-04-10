@@ -22,7 +22,7 @@ namespace Enemies
         public override bool IsPossibleChangeTo()
         {
             return (totalStatesActive < self.settings.maxStealthEnemies || AttackState.totalStatesActive > 2) && 
-                Random.Range(0.0f, 1.0f) < self.settings.stealthChance * Time.deltaTime && 
+                Random.Range(0.0f, 1.0f) < (self.settings.stealthChance / 100.0f) * Time.deltaTime && 
                 self.vec2player.magnitude < self.settings.maxChaseDistance;
         }
 
