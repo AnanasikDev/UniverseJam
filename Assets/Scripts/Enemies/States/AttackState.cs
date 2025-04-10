@@ -23,7 +23,7 @@ namespace Enemies
 
         public override bool IsPossibleChangeTo()
         {
-            return totalStatesActive < self.settings.maxAttackingEnemies && self.vec2player.magnitude <= self.settings.maxAttackDistance + 0.2f;
+            return totalStatesActive < World.instance.globalEnemiesSettings.maxAttackingEnemies && self.vec2player.magnitude <= self.settings.maxAttackDistance + 0.2f;
         }
 
         public override void OnEnter()

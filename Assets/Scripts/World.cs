@@ -1,3 +1,4 @@
+using Enemies;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,8 @@ public class World : MonoBehaviour
 {
     [ReadOnly] public List<EnemyAI> enemies;
     [ReadOnly] public List<HealthComp> healthEntities;
+
+    public GlobalEnemiesSettings globalEnemiesSettings;
 
     [SerializeField][DisableInPlayMode] private bool doIncludeInactiveObjects = false;
 

@@ -6,12 +6,6 @@ namespace Enemies
     [CreateAssetMenu(fileName="BehSettings_", menuName="Enemy Behaviour")]
     public class BehaviourSettings : ScriptableObject
     {
-        [TitleGroup("Global")]
-        [Range(0, 5)] public float maxAttackingEnemies = 2;
-        [Range(0, 5)] public float maxChasingEnemies = 3;
-        [Range(0, 5)] public float maxStealthEnemies = 2;
-        [Range(0, 5)] public float maxFleeingEnemies = 2;
-
         [TitleGroup("Agent")]
         [Range(0, 12)] public float avoidanceRadius = 1.5f;
         [Range(0, 12)] public float weight = 1.5f;
@@ -22,19 +16,19 @@ namespace Enemies
         public bool useWander = true;
 
         [TitleGroup("Chase")]
-        [Range(0, 20)] public float maxChaseDistance = 8;
-        [MinMaxSlider(0, 5, showFields: true)] public Vector2 randomMovementSpeed = new Vector2(2.1f, 2.6f);
+        [Range(0, 40)] public float maxChaseDistance = 8;
+        [MinMaxSlider(0, 8, showFields: true)] public Vector2 randomMovementSpeed = new Vector2(2.1f, 2.6f);
 
         [TitleGroup("Attack")]
         [Range(0, 9)] public float maxAttackDistance = 3;
         [Range(0, 9)] public float minAttackDistance = 1.5f;
         [Range(0, 100)] public float damagePerHit = 20;
-        [Range(0, 5)]   public float hitIntervalSeconds = 1;
+        [Range(0, 8)]   public float hitIntervalSeconds = 1;
 
         [TitleGroup("Flee")]
         [ShowIf("useFlee")][Range(0, 25)] public float maxFleeDistance = 12;
         [ShowIf("useFlee")][MinMaxSlider(0, 5, showFields: true)] public Vector2 randomFleeSpeed = new Vector2(2f, 3f);
-        [ShowIf("useFlee")][Range(0, 5)] public float minFleeTimeSeconds = 3f;
+        [ShowIf("useFlee")][Range(0, 7)] public float minFleeTimeSeconds = 3f;
 
         [TitleGroup("Stealth")]
         [ShowIf("useStealth")][MinMaxSlider(0, 10, showFields:true)] public Vector2 randomStealthTargetDistance = new Vector2(3, 5.5f);

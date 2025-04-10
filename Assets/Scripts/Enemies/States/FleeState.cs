@@ -21,7 +21,7 @@ namespace Enemies
 
         public override bool IsPossibleChangeTo()
         {
-            return totalStatesActive < self.settings.maxFleeingEnemies && self.settings.useFlee;
+            return totalStatesActive < World.instance.globalEnemiesSettings.maxFleeingEnemies && self.settings.useFlee;
         }
 
         public override void OnEnter()

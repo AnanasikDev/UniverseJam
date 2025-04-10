@@ -20,6 +20,8 @@ public class EnemyAI : MonoBehaviour
     [ShowInInspector] public StateEnum currentState { get { return stateMachine?.currentState.type ?? StateEnum.Idle; } }
     public Vector3 vec2player { get { return PlayerController.instance.transform.position - transform.position; } }
 
+    private Vector3 prevAvoidDiff;
+
     private void Start()
     {
         Init();
@@ -67,6 +69,9 @@ public class EnemyAI : MonoBehaviour
             Vector3 vec = (transform.position - enemy.transform.position);
             diff += vec.normalized * factorByDistance(vec.magnitude) * enemy.settings.weight;
         }
+
+        diff = (diff + prevAvoidDiff) / 2.0f;
+        prevAvoidDiff = diff;
 
         return direction + diff;
     }

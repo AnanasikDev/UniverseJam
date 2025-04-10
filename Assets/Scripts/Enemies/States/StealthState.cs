@@ -10,6 +10,7 @@ namespace Enemies
         public static int totalStatesActive = 0;
 
         private float minDuration;
+        private float angularSign;
 
         public StealthState(EnemyAI self) : base(self)
         {
@@ -23,7 +24,7 @@ namespace Enemies
 
         public override bool IsPossibleChangeTo()
         {
-            return (totalStatesActive < self.settings.maxStealthEnemies || AttackState.totalStatesActive > 2) && 
+            return (totalStatesActive < World.instance.globalEnemiesSettings.maxStealthEnemies || AttackState.totalStatesActive > 2) && 
                 Random.Range(0.0f, 1.0f) < (self.settings.stealthChance / 100.0f) * Time.deltaTime && 
                 self.vec2player.magnitude < self.settings.maxChaseDistance && self.settings.useStealth;
         }
@@ -35,6 +36,7 @@ namespace Enemies
 
             Vector3 vec = self.vec2player;
             minDuration = Random.Range(self.settings.randomStealthDurationSeconds.x, self.settings.randomStealthDurationSeconds.y);
+            angularSign = Random.Range(0.0f, 1.0f) > 0.5f ? 1 : -1;
         }
 
         public override void OnExit()
@@ -45,14 +47,14 @@ namespace Enemies
         public override void OnUpdate()
         {
             Vector3 vec = self.vec2player;
-            Vector3 dir = new Vector3(-vec.z, 0, vec.x);
+            Vector3 dir = new Vector3(-vec.z, 0, vec.x) * angularSign;
 
-            float sign = 0;
-            if (vec.magnitude > self.values.stealthTargetDistance + 0.1f) sign = 1;
-            if (vec.magnitude < self.values.stealthTargetDistance - 0.1f) sign = -1;
+            float approachSign = 0;
+            if (vec.magnitude > self.values.stealthTargetDistance + 0.1f) approachSign = 1;
+            if (vec.magnitude < self.values.stealthTargetDistance - 0.1f) approachSign = -1;
 
             Vector3 angularVel = dir * self.values.stealthSpeed / Mathf.Sqrt(vec.magnitude / 2.0f);
-            Vector3 approachVel = vec.normalized * sign * self.values.movementSpeed;
+            Vector3 approachVel = vec.normalized * approachSign * self.values.movementSpeed;
 
             self.Move((angularVel + approachVel) * Time.deltaTime);
         }
