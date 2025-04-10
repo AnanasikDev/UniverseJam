@@ -9,8 +9,9 @@ namespace Enemies
         [TitleGroup("Global")]
         [Range(0, 5)] public float maxAttackingEnemies = 2;
         [Range(0, 5)] public float maxChasingEnemies = 3;
+        [Range(0, 5)] public float maxStealthEnemies = 2;
+        [Range(0, 5)] public float maxFleeingEnemies = 2;
 
-        [TitleGroup("Instance-specific")]
         [TitleGroup("Chase")]
         [Range(0, 20)] public float maxChaseDistance = 8;
         [Range(0, 5)] public float movementSpeed = 2.5f;
@@ -27,8 +28,9 @@ namespace Enemies
         [Range(0, 5)] public float minFleeTimeSeconds = 3f;
 
         [TitleGroup("Stealth")]
-        [Range(0, 10)] public float targetDistance = 5f;
+        [Range(0, 10)] public float stealthTargetDistance = 5f;
         [Range(0, 5)] public float stealthSpeed = 2f;
         [Range(0, 5)] public float stealthDurationSeconds = 1.9f;
+        [SuffixLabel("%")][Range(0, 100)] public float stealthChance = 30;
     }
 }

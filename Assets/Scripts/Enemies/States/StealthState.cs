@@ -9,9 +9,6 @@ namespace Enemies
         /// </summary>
         public static int totalStatesActive = 0;
 
-        private Vector3 target;
-        private float radius;
-
         public StealthState(EnemyAI self) : base(self)
         {
             this.type = StateEnum.Stealth;
@@ -24,7 +21,9 @@ namespace Enemies
 
         public override bool IsPossibleChangeTo()
         {
-            return (StealthState.totalStatesActive < 3 || AttackState.totalStatesActive > 2) && Random.Range(0.0f, 1.0f) < 0.015f && (PlayerController.instance.transform.position - self.transform.position).magnitude < self.settings.maxChaseDistance;
+            return (totalStatesActive < self.settings.maxStealthEnemies || AttackState.totalStatesActive > 2) && 
+                Random.Range(0.0f, 1.0f) < self.settings.stealthChance * Time.deltaTime && 
+                self.vec2player.magnitude < self.settings.maxChaseDistance;
         }
 
         public override void OnEnter()
@@ -32,10 +31,7 @@ namespace Enemies
             base.OnEnter();
             totalStatesActive++;
 
-            Vector3 vec = (PlayerController.instance.transform.position - self.transform.position);
-
-            radius = vec.magnitude;
-            target = self.transform.position + 2 * vec;
+            Vector3 vec = self.vec2player;
         }
 
         public override void OnExit()
@@ -45,23 +41,17 @@ namespace Enemies
 
         public override void OnUpdate()
         {
-            Vector3 vec = (PlayerController.instance.transform.position - self.transform.position);
+            Vector3 vec = self.vec2player;
             Vector3 dir = new Vector3(-vec.z, 0, vec.x);
 
             float sign = 0;
-            if (vec.magnitude > self.settings.targetDistance + 0.1f) sign = 1;
-            if (vec.magnitude < self.settings.targetDistance - 0.1f) sign = -1;
+            if (vec.magnitude > self.settings.stealthTargetDistance + 0.1f) sign = 1;
+            if (vec.magnitude < self.settings.stealthTargetDistance - 0.1f) sign = -1;
 
-            Vector3 angularVel = dir * self.settings.stealthSpeed;
+            Vector3 angularVel = dir * self.settings.stealthSpeed / Mathf.Sqrt(vec.magnitude / 2.0f);
             Vector3 approachVel = vec.normalized * sign * self.settings.movementSpeed;
 
             self.transform.position += (angularVel + approachVel) * Time.deltaTime;
-        }
-
-        public override void DrawGizmos()
-        {
-            Gizmos.color = new Color(1.0f, 0.0f, 0.66f);
-            Gizmos.DrawWireSphere(target, 1);
         }
     }
 }

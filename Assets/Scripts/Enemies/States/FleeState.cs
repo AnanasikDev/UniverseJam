@@ -16,12 +16,12 @@ namespace Enemies
 
         public override bool IsPossibleChangeFrom()
         {
-            return activeTime > 3;
+            return activeTime > self.settings.minFleeTimeSeconds;
         }
 
         public override bool IsPossibleChangeTo()
         {
-            return true;
+            return totalStatesActive < self.settings.maxFleeingEnemies;
         }
 
         public override void OnEnter()
@@ -37,7 +37,7 @@ namespace Enemies
 
         public override void OnUpdate()
         {
-            Vector3 vec = (PlayerController.instance.transform.position - self.transform.position);
+            Vector3 vec = self.vec2player;
 
             self.transform.position += vec.normalized * -1 * self.settings.fleeSpeed * Time.deltaTime;
         }

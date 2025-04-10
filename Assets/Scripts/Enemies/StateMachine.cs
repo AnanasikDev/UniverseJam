@@ -36,11 +36,12 @@ namespace Enemies
                         new Transition(StateEnum.Chase, StateEnum.Attack),
                         new Transition(StateEnum.Chase, StateEnum.Idle),
                         new Transition(StateEnum.Chase, StateEnum.Stealth),
+                        new Transition(StateEnum.Chase, StateEnum.Flee)
                     }
                 },
                 { StateEnum.Attack, new List<Transition>()
                     {
-                        new Transition(StateEnum.Attack, StateEnum.Chase),
+                        new Transition(StateEnum.Attack, StateEnum.Chase, (State state) => self.vec2player.magnitude > self.settings.maxAttackDistance + 0.2f),
                         new Transition(StateEnum.Attack, StateEnum.Idle)
                     }
                 },
@@ -52,8 +53,8 @@ namespace Enemies
                 },
                 { StateEnum.Flee, new List<Transition>()
                     {
-                        //new Transition(StateEnum.Flee, StateEnum.Chase),
-                        //new Transition(StateEnum.Flee, StateEnum.Idle),
+                        new Transition(StateEnum.Flee, StateEnum.Chase),
+                        new Transition(StateEnum.Flee, StateEnum.Idle),
                     }
                 }
             };

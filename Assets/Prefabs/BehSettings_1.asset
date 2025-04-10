@@ -14,9 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAttackingEnemies: 3
   maxChasingEnemies: 3
-  maxChaseDistance: 5
+  maxStealthEnemies: 2
+  maxFleeingEnemies: 1
+  maxChaseDistance: 9
+  movementSpeed: 2
   maxAttackDistance: 2
   minAttackDistance: 1.5
-  movementSpeed: 2
   damagePerHit: 20
   hitIntervalSeconds: 1
+  maxFleeDistance: 12
+  fleeSpeed: 3
+  minFleeTimeSeconds: 3
+  stealthTargetDistance: 2.8
+  stealthSpeed: 1.7
+  stealthDurationSeconds: 1.75
+  stealthChance: 30

@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private new MeshRenderer renderer;
 
     [ShowInInspector] public StateEnum currentState { get { return stateMachine?.currentState.type ?? StateEnum.Idle; } }
+    public Vector3 vec2player { get { return PlayerController.instance.transform.position - transform.position; } }
 
     private void Start()
     {

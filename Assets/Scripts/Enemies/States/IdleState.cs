@@ -21,7 +21,7 @@ namespace Enemies
 
         public override bool IsPossibleChangeTo()
         {
-            return (PlayerController.instance.transform.position - self.transform.position).magnitude > self.settings.maxChaseDistance;
+            return self.vec2player.magnitude > self.settings.maxChaseDistance;
         }
 
         public override void OnEnter()

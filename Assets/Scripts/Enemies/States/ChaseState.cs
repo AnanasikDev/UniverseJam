@@ -21,7 +21,7 @@ namespace Enemies
 
         public override bool IsPossibleChangeTo()
         {
-            return (PlayerController.instance.transform.position - self.transform.position).magnitude < self.settings.maxChaseDistance;
+            return self.vec2player.magnitude < self.settings.maxChaseDistance;
         }
 
         public override void OnEnter()
@@ -37,7 +37,7 @@ namespace Enemies
 
         public override void OnUpdate()
         {
-            Vector3 vec = (PlayerController.instance.transform.position - self.transform.position);
+            Vector3 vec = self.vec2player;
 
             float sign = vec.magnitude > self.settings.minAttackDistance ? 1 : -1;
 
