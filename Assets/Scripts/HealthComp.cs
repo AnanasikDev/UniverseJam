@@ -10,6 +10,8 @@ public class HealthComp : MonoBehaviour
     [ShowInInspector] public float MinHealth { get; set; } = 0;
     [ShowInInspector] public float MaxHealth { get; set; } = 100;
 
+    [Tooltip("Multiplier for the incoming damage")][SerializeField][Range(0, 10)] private float incomingDamageFactor = 1;
+
     public HealthGroup group;
 
     /// <summary>
@@ -27,6 +29,8 @@ public class HealthComp : MonoBehaviour
     [SerializeField] private bool applyBleedingEffect = true;
     [SerializeField][ShowIf("applyBleedingEffect")][ProgressBar(0.0f, 1.0f, r: 1.0f, g: 0.3f, b: 0.25f)][ReadOnly] private float bleedingProgress = 0.0f;
     [SerializeField][ShowIf("applyBleedingEffect")][Range(1, 5)] private float bleedingDamageFactor = 3.0f;
+    
+    [Tooltip("Multiplier for the speed of building up bleeding")][SerializeField][ShowIf("applyBleedingEffect")][Range(0, 10)] private float bleedingSpeedFactor = 1.0f;
     private float currentBleedingDamageFactor = 1.0f;
     [SerializeField][ShowIf("applyBleedingEffect")][Range(0, 0.5f)] private float bleedingRestoreSpeed = 0.1f;
 
@@ -102,8 +106,10 @@ public class HealthComp : MonoBehaviour
 
     public virtual void TakeDamage(float value, float bleedingValue = 0.0f, float bleedingPowerFactor = 1.0f)
     {
+        bleedingValue *= bleedingSpeedFactor;
         Bleed(bleedingValue, bleedingPowerFactor);
         value *= currentBleedingDamageFactor;
+        value *= incomingDamageFactor;
         currentBleedingDamageFactor = 1.0f;
         SetHealth(AbsoluteHealth - value);
     }
