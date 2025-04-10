@@ -37,12 +37,13 @@ public class HealthComp : MonoBehaviour
     [TitleGroup("UI")]
     [DisableInPlayMode] public bool doShowHealthBar = true;
     [DisableInPlayMode][SerializeField][ShowIf("applyBleedingEffect")] private bool doShowBleedingBar = true;
+    [DisableInPlayMode] public bool instantiateNewBar = true;
 
     [DisableInPlayMode][SerializeField][ShowIf("@doShowHealthBar || doShowBleedingBar")] private Canvas canvas;
-    [DisableInPlayMode][SerializeField][ShowIf("@doShowHealthBar || doShowBleedingBar")][AssetsOnly] private UIBar UIBarPrefab;
+    [DisableInPlayMode][SerializeField][ShowIf("@(doShowHealthBar || doShowBleedingBar) && instantiateNewBar")][AssetsOnly] private AbstractUIProgress UIBarPrefab;
+    [DisableInPlayMode][SerializeField][ShowIf("@doShowHealthBar && !instantiateNewBar")][SceneObjectsOnly] AbstractUIProgress UIHealthBarInstance;
 
-    private UIBar UIHealthBarInstance;
-    private UIBar UIBleedingBarInstance;
+    private AbstractUIProgress UIBleedingBarInstance;
 
     [DisableInPlayMode][SerializeField][ShowIf("@applyBleedingEffect && doShowBleedingBar")] private float bleedingBarShift = -25f;
     [DisableInPlayMode][SerializeField][ShowIf("doShowHealthBar")] private float healthBarShift = 0f;
@@ -52,18 +53,20 @@ public class HealthComp : MonoBehaviour
         if (doShowHealthBar)
         {
             Assert.IsNotNull(canvas);
-            Assert.IsNotNull(UIBarPrefab);
-            UIHealthBarInstance = Instantiate(UIBarPrefab, canvas.transform);
-            UIHealthBarInstance.GetComponent<RectTransform>().anchoredPosition += Vector2.up * healthBarShift;
+            if (instantiateNewBar)
+            {
+                Assert.IsNotNull(UIBarPrefab);
+                UIHealthBarInstance = Instantiate(UIBarPrefab, canvas.transform);
+                UIHealthBarInstance.GetComponent<RectTransform>().anchoredPosition += Vector2.up * healthBarShift;
+            }
             UIHealthBarInstance.Init(GetHealth01());
             onHealthChangedEvent += UpdateHealthUI;
         }
         if (applyBleedingEffect && doShowBleedingBar)
         {
             Assert.IsNotNull(canvas);
-            Assert.IsNotNull(UIBarPrefab);
+            if (instantiateNewBar) Assert.IsNotNull(UIBarPrefab);
             UIBleedingBarInstance = Instantiate(UIBarPrefab, canvas.transform);
-            //UIBleedingBarInstance.transform.position += Vector3.down * bleedingBarShift;
             UIBleedingBarInstance.GetComponent<RectTransform>().anchoredPosition += Vector2.up * bleedingBarShift;
             UIBleedingBarInstance.GetForegroundColor = (float value) => Color.Lerp(new Color(0.961f, 0.353f, 0.192f), new Color(0.729f, 0.153f, 0.118f), value);
             UIBleedingBarInstance.Init(bleedingProgress);

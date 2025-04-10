@@ -29,9 +29,14 @@ public class PlayerDash : MonoBehaviour
         Assert.IsNotNull(rigidbody);
     }
 
+    private bool CanDash()
+    {
+        return Time.time - lastTimeDashed > dashTime + dashDelaySeconds && PlayerController.instance.playerStamina.isUsable;
+    }
+
     private void Update()
     {
-        if (Time.time - lastTimeDashed > dashTime + dashDelaySeconds)
+        if (CanDash())
         {
             bool wasDashing = isDashing;
             isDashing = Input.GetKeyDown(dashKey);
@@ -53,6 +58,7 @@ public class PlayerDash : MonoBehaviour
         lastTimeDashed = Time.time;
         dashDirection = (dashTargetPosition - dashStartPosition).normalized;
         dashDirection.y = 0;
+        PlayerController.instance.playerStamina.UseStamina(PlayerController.instance.playerStamina.dashStaminaCost);
     }
 
     private void StopDashing()

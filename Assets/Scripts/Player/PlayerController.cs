@@ -4,6 +4,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerAttack))]
 [RequireComponent(typeof(PlayerCamera))]
+[RequireComponent(typeof(PlayerDash))]
+[RequireComponent(typeof(PlayerStamina))]
+[RequireComponent(typeof(HealthComp))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private bool showAllValues = false;
@@ -33,10 +36,11 @@ public class PlayerController : MonoBehaviour
     [ReadOnly] public Vector2 cursorDirection2D = new Vector2(1, 0);
 
     private new Rigidbody rigidbody;
-    private PlayerAttack playerAttack;
-    private PlayerCamera playerCamera;
-    private PlayerDash playerDash;
+    [HideInInspector] public PlayerAttack playerAttack;
+    [HideInInspector] public PlayerCamera playerCamera;
+    [HideInInspector] public PlayerDash playerDash;
     [HideInInspector] public HealthComp healthComp;
+    [HideInInspector] public PlayerStamina playerStamina;
 
     public static PlayerController instance { get; private set; }
 
@@ -49,6 +53,7 @@ public class PlayerController : MonoBehaviour
         playerCamera = GetComponent<PlayerCamera>();
         playerDash = GetComponent<PlayerDash>();
         healthComp = GetComponent<HealthComp>();
+        playerStamina = GetComponent<PlayerStamina>();
     }
 
     private void SetMovementInputFunction()
@@ -69,6 +74,8 @@ public class PlayerController : MonoBehaviour
 
         defaultPosition = transform.position;
         playerCamera.Init();
+
+        playerStamina.Init();
 
         SetMovementInputFunction();
     }
