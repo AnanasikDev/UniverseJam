@@ -19,7 +19,7 @@ namespace Enemies
 
         [TitleGroup("Chase")]
         [Range(0, 20)] public float maxChaseDistance = 8;
-        [Range(0, 5)] public float movementSpeed = 2.5f;
+        [MinMaxSlider(0, 5, showFields: true)] public Vector2 randomMovementSpeed = new Vector2(2.1f, 2.6f);
 
         [TitleGroup("Attack")]
         [Range(0, 9)] public float maxAttackDistance = 3;
@@ -29,18 +29,18 @@ namespace Enemies
 
         [TitleGroup("Flee")]
         [ShowIf("useFlee")][Range(0, 25)] public float maxFleeDistance = 12;
-        [ShowIf("useFlee")][Range(0, 5)] public float fleeSpeed = 3f;
+        [ShowIf("useFlee")][MinMaxSlider(0, 5, showFields: true)] public Vector2 randomFleeSpeed = new Vector2(2f, 3f);
         [ShowIf("useFlee")][Range(0, 5)] public float minFleeTimeSeconds = 3f;
 
         [TitleGroup("Stealth")]
-        [ShowIf("useStealth")][Range(0, 10)] public float stealthTargetDistance = 5f;
-        [ShowIf("useStealth")][Range(0, 5)] public float stealthSpeed = 2f;
-        [ShowIf("useStealth")][Range(0, 5)] public float stealthDurationSeconds = 1.9f;
+        [ShowIf("useStealth")][MinMaxSlider(0, 10, showFields:true)] public Vector2 randomStealthTargetDistance = new Vector2(3, 5.5f);
+        [ShowIf("useStealth")][MinMaxSlider(0, 5, showFields: true)] public Vector2 randomStealthSpeed = new Vector2(1.4f, 2f);
+        [ShowIf("useStealth")][MinMaxSlider(0, 5, showFields: true)] public Vector2 randomStealthDurationSeconds = new Vector2(1.2f, 2.2f);    
         [ShowIf("useStealth")][SuffixLabel("%")][Range(0, 100)] public float stealthChance = 30;
 
         [TitleGroup("Wander")]
-        [ShowIf("useWander")][MinMaxSlider(0, 25, showFields:true)] public Vector2 wanderRandomDistance = new Vector2(6, 12);
-        [ShowIf("useWander")][Range(0, 5)] public float wanderSpeed = 1.2f;
+        [ShowIf("useWander")][MinMaxSlider(0, 25, showFields:true)] public Vector2 randomWanderDistance = new Vector2(6, 12);
+        [ShowIf("useWander")][MinMaxSlider(0, 5, showFields: true)] public Vector2 randomWanderSpeed = new Vector2(0.9f, 1.3f);
         [ShowIf("useWander")][SuffixLabel("%")][Range(0, 100)] public float wanderChance = 25;
     }
 }

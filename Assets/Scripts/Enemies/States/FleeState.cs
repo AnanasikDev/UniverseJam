@@ -39,7 +39,7 @@ namespace Enemies
         {
             Vector3 vec = self.vec2player;
 
-            self.transform.position += vec.normalized * -1 * self.settings.fleeSpeed * Time.deltaTime;
+            self.transform.position += vec.normalized * -1 * self.values.fleeSpeed * Time.deltaTime;
         }
 
         public override void DrawGizmos()

@@ -8,9 +8,11 @@ public class EnemyAI : MonoBehaviour
     [HideInInspector] public HealthComp health;
 
     public BehaviourSettings settings;
+    public EntityBehaviourValues values;
+
     public StateMachine stateMachine;
 
-    [SerializeField] private Rigidbody rigidbody;
+    [SerializeField] private new Rigidbody rigidbody;
 
     [SerializeField] private new MeshRenderer renderer;
 
@@ -26,6 +28,9 @@ public class EnemyAI : MonoBehaviour
     {
         TryGetComponent<HealthComp>(out health);
         rigidbody = GetComponent<Rigidbody>();
+
+        values = new EntityBehaviourValues();
+        values.Init(settings);
 
         stateMachine = new StateMachine();
         stateMachine.Init(this);

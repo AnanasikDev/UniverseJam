@@ -9,6 +9,8 @@ namespace Enemies
         /// </summary>
         public static int totalStatesActive = 0;
 
+        private float minDuration;
+
         public StealthState(EnemyAI self) : base(self)
         {
             this.type = StateEnum.Stealth;
@@ -16,7 +18,7 @@ namespace Enemies
 
         public override bool IsPossibleChangeFrom()
         {
-            return activeTime > self.settings.stealthDurationSeconds;
+            return activeTime > minDuration;
         }
 
         public override bool IsPossibleChangeTo()
@@ -32,6 +34,7 @@ namespace Enemies
             totalStatesActive++;
 
             Vector3 vec = self.vec2player;
+            minDuration = Random.Range(self.settings.randomStealthDurationSeconds.x, self.settings.randomStealthDurationSeconds.y);
         }
 
         public override void OnExit()
@@ -45,11 +48,11 @@ namespace Enemies
             Vector3 dir = new Vector3(-vec.z, 0, vec.x);
 
             float sign = 0;
-            if (vec.magnitude > self.settings.stealthTargetDistance + 0.1f) sign = 1;
-            if (vec.magnitude < self.settings.stealthTargetDistance - 0.1f) sign = -1;
+            if (vec.magnitude > self.values.stealthTargetDistance + 0.1f) sign = 1;
+            if (vec.magnitude < self.values.stealthTargetDistance - 0.1f) sign = -1;
 
-            Vector3 angularVel = dir * self.settings.stealthSpeed / Mathf.Sqrt(vec.magnitude / 2.0f);
-            Vector3 approachVel = vec.normalized * sign * self.settings.movementSpeed;
+            Vector3 angularVel = dir * self.values.stealthSpeed / Mathf.Sqrt(vec.magnitude / 2.0f);
+            Vector3 approachVel = vec.normalized * sign * self.values.movementSpeed;
 
             self.transform.position += (angularVel + approachVel) * Time.deltaTime;
         }

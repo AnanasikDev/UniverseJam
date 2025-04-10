@@ -33,7 +33,7 @@ namespace Enemies
             totalStatesActive++;
 
             float angle = Random.Range(0, Mathf.PI * 2);
-            float radius = Random.Range(self.settings.wanderRandomDistance.x, self.settings.wanderRandomDistance.y);
+            float radius = Random.Range(self.settings.randomWanderDistance.x, self.settings.randomWanderDistance.y);
 
             target = (self.transform.position + PlayerController.instance.transform.position) / 2.0f + 
                     new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
@@ -48,7 +48,7 @@ namespace Enemies
         {
             Vector3 vec = (target - self.transform.position);
 
-            if (!self.AddPosition(vec.normalized * self.settings.wanderSpeed * Time.deltaTime))
+            if (!self.AddPosition(vec.normalized * self.values.wanderSpeed * Time.deltaTime))
             {
                 Debug.Log("Wandering failed");
             }
