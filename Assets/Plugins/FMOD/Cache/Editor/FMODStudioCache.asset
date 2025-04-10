@@ -21,7 +21,11 @@ MonoBehaviour:
   - {fileID: 4042141504673364430}
   StringsBanks:
   - {fileID: 3576584833939708423}
+<<<<<<< HEAD
   cacheTime: 638796268921833156
+=======
+  cacheTime: 638797699454217708
+>>>>>>> refs/remotes/origin/main
   cacheVersion: 131624
 --- !u!114 &3576584833939708423
 MonoBehaviour:
@@ -38,7 +42,11 @@ MonoBehaviour:
   Path: Audio/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
+<<<<<<< HEAD
   lastModified: 638796268921833156
+=======
+  lastModified: 638797699454217708
+>>>>>>> refs/remotes/origin/main
   FileSizes:
   - Name: Desktop
     Value: 712
@@ -58,7 +66,11 @@ MonoBehaviour:
   Path: Audio/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
+<<<<<<< HEAD
   lastModified: 638796268921823057
+=======
+  lastModified: 638797699454217708
+>>>>>>> refs/remotes/origin/main
   FileSizes:
   - Name: Desktop
     Value: 1036
