@@ -21,7 +21,7 @@ namespace Enemies
 
         public override bool IsPossibleChangeTo()
         {
-            return totalStatesActive < self.settings.maxFleeingEnemies;
+            return totalStatesActive < self.settings.maxFleeingEnemies && self.settings.useFlee;
         }
 
         public override void OnEnter()
@@ -39,7 +39,7 @@ namespace Enemies
         {
             Vector3 vec = self.vec2player;
 
-            self.transform.position += vec.normalized * -1 * self.values.fleeSpeed * Time.deltaTime;
+            self.Move(vec.normalized * -1 * self.values.fleeSpeed * Time.deltaTime);
         }
 
         public override void DrawGizmos()

@@ -12,6 +12,10 @@ namespace Enemies
         [Range(0, 5)] public float maxStealthEnemies = 2;
         [Range(0, 5)] public float maxFleeingEnemies = 2;
 
+        [TitleGroup("Agent")]
+        [Range(0, 12)] public float avoidanceRadius = 1.5f;
+        [Range(0, 12)] public float weight = 1.5f;
+
         [TitleGroup("States")]
         public bool useFlee = true;
         public bool useStealth = true;

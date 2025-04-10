@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cef1145973e9cfb49b1b363981186a2c, type: 3}
-  m_Name: BehSettings_1
+  m_Name: BehSettings_Big
   m_EditorClassIdentifier: 
   maxAttackingEnemies: 3
   maxChasingEnemies: 3
   maxStealthEnemies: 2
   maxFleeingEnemies: 1
-  avoidanceRadius: 2
-  weight: 1
-  useFlee: 1
-  useStealth: 1
+  avoidanceRadius: 1
+  weight: 4
+  useFlee: 0
+  useStealth: 0
   useWander: 1
-  maxChaseDistance: 20
-  randomMovementSpeed: {x: 2.1, y: 2.6}
+  maxChaseDistance: 12.1
+  randomMovementSpeed: {x: 0.90558815, y: 1.3549721}
   maxAttackDistance: 2
   minAttackDistance: 1.5
   damagePerHit: 20

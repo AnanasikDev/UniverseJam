@@ -1,6 +1,7 @@
 using Enemies;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -51,6 +52,26 @@ public class EnemyAI : MonoBehaviour
         renderer.material.color = getclr[state];
     }
 
+    private Vector3 AvoidOthers(Vector3 direction)
+    {
+        float factorByDistance(float distance)
+        {
+            return distance > settings.avoidanceRadius ? 0 : 1.0f / Mathf.Clamp(Mathf.Pow(distance * 3.0f, 5), 0.01f, 100);
+        }
+
+        Vector3 diff = Vector3.zero;
+        foreach (var enemy in World.instance.enemies)
+        {
+            if (enemy == this) continue;
+
+            Vector3 vec = (transform.position - enemy.transform.position);
+            diff += vec.normalized * factorByDistance(vec.magnitude) * enemy.settings.weight;
+        }
+
+        return direction + diff;
+    }
+
+
     public bool SetPosition(Vector3 newPosition)
     {
         float desiredDiff = (newPosition - rigidbody.position).magnitude;
@@ -62,8 +83,9 @@ public class EnemyAI : MonoBehaviour
         return diff > desiredDiff * 0.35f;
     }
 
-    public bool AddPosition(Vector3 diff)
+    public bool Move(Vector3 diff, bool avoidOthers = true)
     {
+        if (avoidOthers) diff = AvoidOthers(diff);
         return SetPosition(rigidbody.position + diff);
     }
 

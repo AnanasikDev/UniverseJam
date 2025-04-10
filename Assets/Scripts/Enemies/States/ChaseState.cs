@@ -41,7 +41,7 @@ namespace Enemies
 
             float sign = vec.magnitude > self.settings.minAttackDistance ? 1 : -1;
 
-            self.transform.position += vec.normalized * sign * self.values.movementSpeed * Time.deltaTime;
+            self.Move(vec.normalized * sign * self.values.movementSpeed * Time.deltaTime);
         }
 
         public override void DrawGizmos()

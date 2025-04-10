@@ -24,7 +24,7 @@ namespace Enemies
 
         public override bool IsPossibleChangeTo()
         {
-            return self.vec2player.magnitude > self.settings.maxChaseDistance;
+            return self.vec2player.magnitude > self.settings.maxChaseDistance && self.settings.useWander;
         }
 
         public override void OnEnter()
@@ -48,7 +48,7 @@ namespace Enemies
         {
             Vector3 vec = (target - self.transform.position);
 
-            if (!self.AddPosition(vec.normalized * self.values.wanderSpeed * Time.deltaTime))
+            if (!self.Move(vec.normalized * self.values.wanderSpeed * Time.deltaTime))
             {
                 Debug.Log("Wandering failed");
             }

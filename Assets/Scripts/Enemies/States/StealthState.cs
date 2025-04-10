@@ -25,7 +25,7 @@ namespace Enemies
         {
             return (totalStatesActive < self.settings.maxStealthEnemies || AttackState.totalStatesActive > 2) && 
                 Random.Range(0.0f, 1.0f) < (self.settings.stealthChance / 100.0f) * Time.deltaTime && 
-                self.vec2player.magnitude < self.settings.maxChaseDistance;
+                self.vec2player.magnitude < self.settings.maxChaseDistance && self.settings.useStealth;
         }
 
         public override void OnEnter()
@@ -54,7 +54,7 @@ namespace Enemies
             Vector3 angularVel = dir * self.values.stealthSpeed / Mathf.Sqrt(vec.magnitude / 2.0f);
             Vector3 approachVel = vec.normalized * sign * self.values.movementSpeed;
 
-            self.transform.position += (angularVel + approachVel) * Time.deltaTime;
+            self.Move((angularVel + approachVel) * Time.deltaTime);
         }
     }
 }
