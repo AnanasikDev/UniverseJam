@@ -22,15 +22,13 @@ public class EnemyAI : MonoBehaviour
 
     private Vector3 prevAvoidDiff;
 
-    private void Start()
-    {
-        Init();
-    }
+    [HideInInspector] public Room spawnRoom;
 
     public void Init()
     {
-        TryGetComponent<HealthComp>(out health);
+        health = GetComponent<HealthComp>();
         rigidbody = GetComponent<Rigidbody>();
+        health.onDiedEvent += OnDied;
 
         values = new EntityBehaviourValues();
         values.Init(settings);
@@ -93,6 +91,16 @@ public class EnemyAI : MonoBehaviour
         diff = new Vector3(diff.x, 0, diff.z);
         if (avoidOthers) diff = AvoidOthers(diff);
         return SetPosition(rigidbody.position + diff);
+    }
+
+    private void OnDied()
+    {
+        health.onDiedEvent -= OnDied;
+        World.totalKills++;
+        World.instance.enemies.Remove(this);
+        World.instance.healthEntities.Remove(health);
+
+        Destroy(gameObject);
     }
 
     private void Update()

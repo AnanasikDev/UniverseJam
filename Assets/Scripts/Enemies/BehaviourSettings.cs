@@ -29,6 +29,7 @@ namespace Enemies
         [ShowIf("useFlee")][Range(0, 25)] public float maxFleeDistance = 12;
         [ShowIf("useFlee")][MinMaxSlider(0, 5, showFields: true)] public Vector2 randomFleeSpeed = new Vector2(2f, 3f);
         [ShowIf("useFlee")][Range(0, 7)] public float minFleeTimeSeconds = 3f;
+        [ShowIf("useFlee")][MinMaxSlider(0, 0.5f, showFields: true)] public Vector2 randomFleeChance = new Vector2(0.1f, 0.3f);
 
         [TitleGroup("Stealth")]
         [ShowIf("useStealth")][MinMaxSlider(0, 10, showFields:true)] public Vector2 randomStealthTargetDistance = new Vector2(3, 5.5f);

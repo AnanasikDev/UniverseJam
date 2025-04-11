@@ -24,6 +24,7 @@ public class HealthComp : MonoBehaviour
     public event Action<float> onDamagedEvent;
     public event Action<float> onBleedingChangedEvent;
     public event Action onDiedEvent;
+    public static event Action<HealthComp> onAnyDiedEvent;
 
     [TitleGroup("Bleeding")]
     [SerializeField] private bool applyBleedingEffect = true;
@@ -141,6 +142,7 @@ public class HealthComp : MonoBehaviour
     public virtual void Die()
     {
         onDiedEvent?.Invoke();
+        onAnyDiedEvent?.Invoke(this);
     }
 
     public enum HealthGroup
