@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class BaseWeapon : MonoBehaviour
@@ -6,6 +7,7 @@ public abstract class BaseWeapon : MonoBehaviour
     protected float lastTimeUsed = -100;
     public HealthComp.HealthGroup targetHealthGroup = HealthComp.HealthGroup.Enemy;
     public event System.Action onUsedEvent;
+    public event System.Action onFinishedUsingEvent;
 
     public virtual bool IsReadyToUse()
     {
@@ -18,7 +20,14 @@ public abstract class BaseWeapon : MonoBehaviour
     {
         lastTimeUsed = Time.time;
         onUsedEvent?.Invoke();
+        StartCoroutine(FinishUsing());
         Debug.Log(data.name + " has been used towards " + targetHealthGroup);
+    }
+
+    protected virtual IEnumerator FinishUsing()
+    {
+        yield return new WaitForSeconds(data.reloadTimeSeconds);
+        onFinishedUsingEvent?.Invoke();
     }
 
     public virtual WeaponHitInfo CalculateDamage()
