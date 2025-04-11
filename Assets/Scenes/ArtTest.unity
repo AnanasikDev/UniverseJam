@@ -1889,6 +1889,7 @@ GameObject:
   - component: {fileID: 1242280442}
   - component: {fileID: 1242280441}
   - component: {fileID: 1242280440}
+  - component: {fileID: 1242280443}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -1904,8 +1905,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242280438}
   m_LocalRotation: {x: -0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -33.16, y: 3.47, z: -1.96}
-  m_LocalScale: {x: 0.79669, y: 1, z: 0.89928}
+  m_LocalPosition: {x: -34.67, y: 3.59, z: -2.34}
+  m_LocalScale: {x: 0.75275254, y: 1, z: 0.78877306}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1975,6 +1976,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242280438}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1242280443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242280438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05dca30c931aed44baab2bcc4ef7c622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 1242280441}
+  locked: 1
 --- !u!1 &1281602711
 GameObject:
   m_ObjectHideFlags: 0
