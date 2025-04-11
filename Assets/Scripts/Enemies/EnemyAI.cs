@@ -90,6 +90,7 @@ public class EnemyAI : MonoBehaviour
 
     public bool Move(Vector3 diff, bool avoidOthers = true)
     {
+        diff = new Vector3(diff.x, 0, diff.z);
         if (avoidOthers) diff = AvoidOthers(diff);
         return SetPosition(rigidbody.position + diff);
     }
