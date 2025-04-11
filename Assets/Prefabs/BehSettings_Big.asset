@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef1145973e9cfb49b1b363981186a2c, type: 3}
   m_Name: BehSettings_Big
   m_EditorClassIdentifier: 
-  maxAttackingEnemies: 3
-  maxChasingEnemies: 3
-  maxStealthEnemies: 2
-  maxFleeingEnemies: 1
   avoidanceRadius: 1
   weight: 4
   useFlee: 0
@@ -30,6 +26,7 @@ MonoBehaviour:
   maxFleeDistance: 12
   randomFleeSpeed: {x: 2, y: 3}
   minFleeTimeSeconds: 3
+  randomFleeChance: {x: 10, y: 30}
   randomStealthTargetDistance: {x: 3, y: 5.5}
   randomStealthSpeed: {x: 1.4, y: 2}
   randomStealthDurationSeconds: {x: 1.2, y: 2.2}
