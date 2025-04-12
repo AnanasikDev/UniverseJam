@@ -15,7 +15,8 @@ namespace Enemies
             animator = GetComponentInChildren<Animator>();
             self = GetComponent<EnemyAI>();
 
-            // set animations speeds
+            animator.SetFloat("MovementSpeedFac", self.settings.walkingAnimationSpeed);
+            animator.SetFloat("AttackSpeedFac", self.settings.attackAnimationSpeed);
 
             self.health.onDamagedEvent += (float value) => animator.SetTrigger("Hurt");
             ((AttackState)self.stateMachine.enum2state[StateEnum.Attack]).onStartedAttacking += () =>

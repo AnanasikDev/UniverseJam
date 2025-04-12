@@ -17,13 +17,15 @@ MonoBehaviour:
   useFlee: 0
   useStealth: 0
   useWander: 1
+  walkingAnimationSpeed: 0.5
+  attackAnimationSpeed: 0.7
   maxChaseDistance: 12.1
   randomMovementSpeed: {x: 0.90558815, y: 1.3549721}
-  maxAttackDistance: 2.5
-  maxAttackApproachDistance: 2.4
-  minAttackApproachDistance: 1.4
+  maxAttackDistance: 4.4
+  maxAttackApproachDistance: 2
+  minAttackApproachDistance: 1.3
   damagePerHit: 30
-  hitIntervalSeconds: 3
+  hitIntervalSeconds: 2.6
   maxFleeDistance: 12
   randomFleeSpeed: {x: 2, y: 3}
   minFleeTimeSeconds: 3
