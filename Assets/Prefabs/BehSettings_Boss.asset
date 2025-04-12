@@ -19,7 +19,7 @@ MonoBehaviour:
   useWander: 1
   walkingAnimationSpeed: 0.4
   attackAnimationSpeed: 0.6
-  deathAnimationSpeed: 0.5
+  deathAnimationSpeed: 0.3
   maxChaseDistance: 40
   randomMovementSpeed: {x: 1.6583432, y: 1.9437177}
   maxAttackDistance: 4.79

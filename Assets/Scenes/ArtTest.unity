@@ -10924,7 +10924,9 @@ MonoBehaviour:
   targetTransform: {fileID: 313560555}
   spawnPosXRandomness: 4.69
   spawnPosZRandomness: 2.65
-  targetAmount: 30
+  targetAmount: 40
+  newMaxAttackingAmount: 15
+  intervalSeconds: 0.6
 --- !u!4 &1860516509
 Transform:
   m_ObjectHideFlags: 0

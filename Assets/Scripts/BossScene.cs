@@ -14,11 +14,16 @@ public class BossScene : MonoBehaviour
     [SerializeField] private float spawnPosXRandomness = 6;
     [SerializeField] private float spawnPosZRandomness = 2;
     [SerializeField] private int targetAmount = 30;
+    [SerializeField] private int newMaxAttackingAmount = 15;
+    [SerializeField] private float intervalSeconds = 0.9f;
+    [SerializeField] private float initIntevalSeconds = 3f;
     private int currentAmount = 0;
+    private int defaultMaxAttackingAmount;
 
     private void Start()
     {
         HealthComp.onAnyDiedEvent += TryInit;
+        defaultMaxAttackingAmount = World.instance.globalEnemiesSettings.maxAttackingEnemies;
     }
 
     private void TryInit(HealthComp died)
@@ -31,6 +36,7 @@ public class BossScene : MonoBehaviour
     private void OnDisable()
     {
         HealthComp.onAnyDiedEvent -= TryInit;
+        World.instance.globalEnemiesSettings.maxAttackingEnemies = defaultMaxAttackingAmount;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,7 +51,7 @@ public class BossScene : MonoBehaviour
     {
         IEnumerator spawn()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(intervalSeconds);
             EnemyAI enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length - 1)]);
             enemy.transform.position = targetTransform.position + 
                 Vector3.right * Random.Range(-spawnPosXRandomness, spawnPosXRandomness) +
@@ -60,7 +66,14 @@ public class BossScene : MonoBehaviour
                 yield break;
         }
 
-        StartCoroutine(spawn());
+        IEnumerator startSpawning()
+        {
+            yield return new WaitForSeconds(initIntevalSeconds);
+            yield return spawn();
+        }
+
+        StartCoroutine(startSpawning());
+        World.instance.globalEnemiesSettings.maxAttackingEnemies = newMaxAttackingAmount;
     }
 
     private void OnDrawGizmos()
