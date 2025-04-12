@@ -10,6 +10,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private bool showAllValues = false;
+    public bool doDie = true;
 
     [TitleGroup("Movement")]
     [SerializeField][OnValueChanged("SetMovementInputFunction")] private bool useSmoothInput = true;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     public event Action<Vector2> onMovingEvent;
     public event Action onStoppedEvent;
+    public event Action onDiedEvent;
 
     public static PlayerController instance { get; private set; }
 
@@ -128,7 +130,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnDied()
     {
+        if (!doDie) return;
+
         enabled = false;
+        onDiedEvent?.Invoke();
     }
 
     private void OnDrawGizmos()

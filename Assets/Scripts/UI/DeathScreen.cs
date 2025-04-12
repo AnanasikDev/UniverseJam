@@ -10,7 +10,12 @@ public class DeathScreen : MonoBehaviour
 
     private void Start()
     {
-        PlayerController.instance.healthComp.onDiedEvent += ShowUI;
+        PlayerController.instance.onDiedEvent += ShowUI;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerController.instance.onDiedEvent -= ShowUI;
     }
 
     private void ShowUI()

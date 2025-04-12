@@ -13,6 +13,7 @@ namespace Enemies
         public Dictionary<StateEnum, List<Transition>> stateTree;
 
         public bool isTransitioning = false;
+        private bool isDead = false;
 
         public void Init(EnemyAI self)
         {
@@ -123,6 +124,14 @@ namespace Enemies
         private void OnStateChanged()
         {
             self.ChangeState(currentState.type);
+        }
+
+        public void Die()
+        {
+            if (isDead) return;
+
+            currentState.OnExit();
+            isDead = true;
         }
     }
 }
