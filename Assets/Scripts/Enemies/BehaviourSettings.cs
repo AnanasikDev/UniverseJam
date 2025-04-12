@@ -15,6 +15,10 @@ namespace Enemies
         public bool useStealth = true;
         public bool useWander = true;
 
+        [TitleGroup("Animations")]
+        public float walkingAnimationSpeed;
+        public float attackAnimationSpeed;
+
         [TitleGroup("Chase")]
         [Range(0, 40)] public float maxChaseDistance = 8;
         [MinMaxSlider(0, 8, showFields: true)] public Vector2 randomMovementSpeed = new Vector2(2.1f, 2.6f);

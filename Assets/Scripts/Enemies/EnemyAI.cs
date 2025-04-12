@@ -26,7 +26,9 @@ public class EnemyAI : MonoBehaviour
     [HideInInspector] public Room spawnRoom;
 
     public event Action<Vector2> onMovingEvent;
+    public event Action onStoppedEvent;
     public event Action onAttackedEvent;
+    private bool isMoving;
 
     [HideInInspector] public EnemyAnimator animator;
 
@@ -42,7 +44,7 @@ public class EnemyAI : MonoBehaviour
 
         stateMachine = new StateMachine();
         stateMachine.Init(this);
-        GetComponent<EnemyAnimator>().Init();
+        animator.Init();
     }
 
     public void ChangeState(StateEnum state)
@@ -98,7 +100,11 @@ public class EnemyAI : MonoBehaviour
     {
         diff = new Vector3(diff.x, 0, diff.z);
         if (avoidOthers) diff = AvoidOthers(diff);
-        if (diff.sqrMagnitude != 0) onMovingEvent?.Invoke(diff);
+        if (diff.sqrMagnitude != 0)
+        {
+            onMovingEvent?.Invoke(diff);
+            isMoving = true;
+        }
         return SetPosition(rigidbody.position + diff);
     }
 
@@ -118,6 +124,13 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        bool wasMoving = isMoving;
+        isMoving = false;
         stateMachine.Update();
+
+        if (wasMoving && !isMoving)
+        {
+            onStoppedEvent?.Invoke();
+        }
     }
 }

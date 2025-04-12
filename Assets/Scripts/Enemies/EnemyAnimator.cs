@@ -14,6 +14,10 @@ namespace Enemies
         {
             animator = GetComponentInChildren<Animator>();
             self = GetComponent<EnemyAI>();
+
+            animator.SetFloat("MovementSpeedFac", self.settings.walkingAnimationSpeed);
+            animator.SetFloat("AttackSpeedFac", self.settings.attackAnimationSpeed);
+
             self.health.onDamagedEvent += (float value) => animator.SetTrigger("Hurt");
             ((AttackState)self.stateMachine.enum2state[StateEnum.Attack]).onStartedAttacking += () =>
             {
@@ -44,6 +48,11 @@ namespace Enemies
                 {
                     animator.SetBool("Moving", false);
                 }
+            };
+
+            self.onStoppedEvent += () =>
+            {
+                animator.SetBool("Moving", false);
             };
         }
 
