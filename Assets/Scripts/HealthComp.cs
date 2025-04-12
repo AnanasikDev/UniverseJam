@@ -6,9 +6,9 @@ using UnityEngine.Assertions;
 public class HealthComp : MonoBehaviour
 {
     [ProgressBar("@MinHealth", "@MaxHealth", ColorGetter = "@Color.Lerp(Color.red, Color.green, AbsoluteHealth / 100.0f)")]
-    [ShowInInspector] public float AbsoluteHealth { get; set; } = 100;
-    [ShowInInspector] public float MinHealth { get; set; } = 0;
-    [ShowInInspector] public float MaxHealth { get; set; } = 100;
+    public float AbsoluteHealth = 100;
+    public float MinHealth = 0;
+    public float MaxHealth = 100;
 
     [Tooltip("Multiplier for the incoming damage")][SerializeField][Range(0, 10)] private float incomingDamageFactor = 1;
 
