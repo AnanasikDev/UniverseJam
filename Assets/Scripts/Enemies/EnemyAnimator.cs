@@ -17,6 +17,7 @@ namespace Enemies
 
             animator.SetFloat("MovementSpeedFac", self.settings.walkingAnimationSpeed);
             animator.SetFloat("AttackSpeedFac", self.settings.attackAnimationSpeed);
+            animator.SetFloat("DeathSpeedFac", self.settings.deathAnimationSpeed);
 
             self.health.onDamagedEvent += (float value) => animator.SetTrigger("Hurt");
             ((AttackState)self.stateMachine.enum2state[StateEnum.Attack]).onStartedAttacking += () =>
