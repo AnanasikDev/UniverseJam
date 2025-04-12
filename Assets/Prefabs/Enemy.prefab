@@ -173,9 +173,9 @@ MonoBehaviour:
   group: 0
   applyBleedingEffect: 1
   bleedingProgress: 0
-  bleedingDamageFactor: 3
+  bleedingDamageFactor: 3.5
   bleedingSpeedFactor: 1
-  bleedingRestoreSpeed: 0.09
+  bleedingRestoreSpeed: 0.02
   doShowHealthBar: 1
   doShowBleedingBar: 1
   instantiateNewBar: 1
@@ -183,7 +183,7 @@ MonoBehaviour:
   UIBarPrefab: {fileID: 7046704902058888709, guid: 1b6d8f1438d64424690a03922348bb25,
     type: 3}
   UIHealthBarInstance: {fileID: 0}
-  bleedingBarShift: 98
+  bleedingBarShift: 90
   healthBarShift: 100
 --- !u!54 &5495580765360236000
 Rigidbody:

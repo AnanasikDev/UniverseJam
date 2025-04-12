@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Weapon_Dagger
   m_EditorClassIdentifier: 
   name: Dagger
-  damagePerUse: 4.5
+  damagePerUse: 5
   damageRandomization: 0.075
   reloadTimeSeconds: 0.21
   minDistance: 0
