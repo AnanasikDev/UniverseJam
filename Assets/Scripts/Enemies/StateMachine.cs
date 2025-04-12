@@ -48,7 +48,7 @@ namespace Enemies
                 { StateEnum.Attack, new List<Transition>()
                     {
                         new Transition(StateEnum.Attack, StateEnum.Chase, (State state) => self.vec2player.magnitude > self.settings.maxAttackDistance + 0.2f, delay: 1.2f),
-                        new Transition(StateEnum.Attack, StateEnum.Idle, delay: 0.8f)
+                        new Transition(StateEnum.Attack, StateEnum.Idle, delay: 1.2f)
                     }
                 },
                 { StateEnum.Stealth, new List<Transition>()
