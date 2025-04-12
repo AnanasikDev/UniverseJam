@@ -18,6 +18,7 @@ namespace Enemies
         [TitleGroup("Animations")]
         public float walkingAnimationSpeed;
         public float attackAnimationSpeed;
+        public float attackExitTime = 1.2f;
         public float deathAnimationSpeed;
 
         [TitleGroup("Chase")]

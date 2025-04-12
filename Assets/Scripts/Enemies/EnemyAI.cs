@@ -30,13 +30,13 @@ public class EnemyAI : MonoBehaviour
     public event Action onAttackedEvent;
     private bool isMoving;
 
-    [HideInInspector] public EnemyAnimator animator;
+    [HideInInspector] public AbstractEnemyAnimator animator;
 
     public void Init()
     {
         health = GetComponent<HealthComp>();
         rigidbody = GetComponent<Rigidbody>();
-        animator = GetComponent<EnemyAnimator>();
+        animator = GetComponent<AbstractEnemyAnimator>();
         health.onDiedEvent += OnDied;
 
         values = new EntityBehaviourValues();
