@@ -22,6 +22,7 @@ public class UIProgressShaderBar : AbstractUIProgress
         Assert.AreApproximatelyEqual(background.rectTransform.sizeDelta.x, foreground.rectTransform.sizeDelta.x, "UIBar background and foreground must have identical width");
         width = background.rectTransform.sizeDelta.x;
         defaultForegroundColor = foreground.color;
+        GetForegroundColor = (float val) => Color.Lerp(new Color(0.631f, 0.051f, 0.051f), new Color(0.812f, 0.078f, 0.078f), val);
         SetValue01Instantly(value);
     }
 
