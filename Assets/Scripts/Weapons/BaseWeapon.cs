@@ -21,7 +21,6 @@ public abstract class BaseWeapon : MonoBehaviour
         lastTimeUsed = Time.time;
         onUsedEvent?.Invoke();
         StartCoroutine(FinishUsing());
-        Debug.Log(data.name + " has been used towards " + targetHealthGroup);
     }
 
     protected virtual IEnumerator FinishUsing()

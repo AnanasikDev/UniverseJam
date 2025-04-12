@@ -27,8 +27,6 @@ public class World : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("World init");
-
         // populate with enemies added in Editor
         enemies = GameObject.FindObjectsOfType<EnemyAI>(doIncludeInactiveObjects).ToList();
         healthEntities = GameObject.FindObjectsOfType<HealthComp>(doIncludeInactiveObjects).ToList();

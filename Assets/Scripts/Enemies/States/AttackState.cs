@@ -58,7 +58,6 @@ namespace Enemies
         {
             if (self.vec2player.magnitude <= self.settings.maxAttackDistance)
             {
-                Debug.Log("Hit player!");
                 PlayerController.instance.healthComp.TakeDamage(self.settings.damagePerHit);
             }
         }

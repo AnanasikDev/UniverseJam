@@ -81,7 +81,7 @@ namespace Enemies
             if (GetNextState(out StateEnum state))
             {
                 currentState.OnExit();
-                Debug.Log($"Transition from {currentState.type} to {state}");
+                //Debug.Log($"Transition from {currentState.type} to {state}");
                 currentState = enum2state[state];
                 currentState.OnEnter();
                 OnStateChanged();

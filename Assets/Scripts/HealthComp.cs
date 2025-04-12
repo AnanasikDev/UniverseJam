@@ -13,6 +13,7 @@ public class HealthComp : MonoBehaviour
     [Tooltip("Multiplier for the incoming damage")][SerializeField][Range(0, 10)] private float incomingDamageFactor = 1;
 
     public bool IsAlive { get { return AbsoluteHealth > MinHealth; } }
+    private bool hasDied = false;
 
     public HealthGroup group;
 
@@ -152,8 +153,10 @@ public class HealthComp : MonoBehaviour
 
     public virtual void Die()
     {
+        if (hasDied) return;
         onDiedEvent?.Invoke();
         onAnyDiedEvent?.Invoke(this);
+        hasDied = true;
     }
 
     public enum HealthGroup

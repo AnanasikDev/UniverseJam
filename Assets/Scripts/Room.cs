@@ -27,6 +27,7 @@ public class Room : MonoBehaviour
             enemy.spawnRoom = this;
             enemy.Init();
         }
+        Debug.Log($"room {index} has {enemies.Count} enemies on init");
 
         HealthComp.onAnyDiedEvent += TryUnlock;
 
@@ -38,9 +39,10 @@ public class Room : MonoBehaviour
 
     private void TryUnlock(HealthComp died)
     {
-        if (!locked || died.group == HealthComp.HealthGroup.Player) return;
+        if (!locked || died.group == HealthComp.HealthGroup.Player || index != currentRoom.index) return;
 
         var enemy = died.GetComponent<EnemyAI>();
+
         if (enemies.Contains(enemy))
         {
             enemies.Remove(enemy);
@@ -62,7 +64,8 @@ public class Room : MonoBehaviour
         IEnumerator DisableCollider()
         {
             PlayerController.instance.healthComp.SetHealth(PlayerController.instance.healthComp.MaxHealth);
-            yield return new WaitForSeconds(3);
+            Debug.Log($"regen! & opening the door from {currentRoom.index} to {currentRoom.index + 1}");
+            yield return new WaitForSeconds(2.5f);
             gateCollider.enabled = false;
             onUnlockedEvent?.Invoke(this);
         }
