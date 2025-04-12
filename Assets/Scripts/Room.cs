@@ -67,4 +67,9 @@ public class Room : MonoBehaviour
             onUnlockedEvent?.Invoke(this);
         }
     }
+
+    private void OnDisable()
+    {
+        HealthComp.onAnyDiedEvent -= TryUnlock;
+    }
 }
