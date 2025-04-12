@@ -45,9 +45,9 @@ public class HealthComp : MonoBehaviour
 
     [DisableInPlayMode][SerializeField][ShowIf("@doShowHealthBar || doShowBleedingBar")] private Canvas canvas;
     [DisableInPlayMode][SerializeField][ShowIf("@(doShowHealthBar || doShowBleedingBar) && instantiateNewBar")][AssetsOnly] private AbstractUIProgress UIBarPrefab;
-    [DisableInPlayMode][SerializeField][ShowIf("@doShowHealthBar && !instantiateNewBar")][SceneObjectsOnly] AbstractUIProgress UIHealthBarInstance;
+    [DisableInPlayMode][ShowIf("@doShowHealthBar && !instantiateNewBar")][SceneObjectsOnly] public AbstractUIProgress UIHealthBarInstance;
 
-    private AbstractUIProgress UIBleedingBarInstance;
+    [HideInInspector] public AbstractUIProgress UIBleedingBarInstance;
 
     [DisableInPlayMode][SerializeField][ShowIf("@applyBleedingEffect && doShowBleedingBar")] private float bleedingBarShift = -25f;
     [DisableInPlayMode][SerializeField][ShowIf("doShowHealthBar")] private float healthBarShift = 0f;

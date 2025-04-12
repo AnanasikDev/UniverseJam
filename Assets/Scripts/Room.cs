@@ -27,7 +27,6 @@ public class Room : MonoBehaviour
             enemy.spawnRoom = this;
             enemy.Init();
         }
-        Debug.Log($"room {index} has {enemies.Count} enemies on init");
 
         HealthComp.onAnyDiedEvent += TryUnlock;
 
@@ -64,7 +63,6 @@ public class Room : MonoBehaviour
         IEnumerator DisableCollider()
         {
             PlayerController.instance.healthComp.SetHealth(PlayerController.instance.healthComp.MaxHealth);
-            Debug.Log($"regen! & opening the door from {currentRoom.index} to {currentRoom.index + 1}");
             yield return new WaitForSeconds(2.5f);
             gateCollider.enabled = false;
             onUnlockedEvent?.Invoke(this);

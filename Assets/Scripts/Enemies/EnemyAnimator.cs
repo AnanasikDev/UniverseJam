@@ -29,12 +29,8 @@ namespace Enemies
             {
                 animator.SetTrigger("Dead");
                 self.enabled = false;
-                IEnumerator wait()
-                {
-                    yield return new WaitForSeconds(2);
-                    Destroy(gameObject);
-                }
-                StartCoroutine(wait());
+                self.health.UIBleedingBarInstance.gameObject.SetActive(false);
+                self.health.UIHealthBarInstance.gameObject.SetActive(false);
             };
             self.onMovingEvent += (Vector2 diff) =>
             {
