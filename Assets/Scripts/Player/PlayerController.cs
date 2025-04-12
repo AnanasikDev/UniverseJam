@@ -10,6 +10,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private bool showAllValues = false;
+    public bool doDie = true;
 
     [TitleGroup("Movement")]
     [SerializeField][OnValueChanged("SetMovementInputFunction")] private bool useSmoothInput = true;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     public event Action<Vector2> onMovingEvent;
     public event Action onStoppedEvent;
+    public event Action onDiedEvent;
 
     public static PlayerController instance { get; private set; }
 
@@ -57,6 +59,8 @@ public class PlayerController : MonoBehaviour
         playerDash = GetComponent<PlayerDash>();
         healthComp = GetComponent<HealthComp>();
         playerStamina = GetComponent<PlayerStamina>();
+
+        healthComp.onDiedEvent += OnDied;   
     }
 
     private void SetMovementInputFunction()
@@ -118,6 +122,18 @@ public class PlayerController : MonoBehaviour
             onMovingEvent?.Invoke(diff);
             lastPosition = transform.position;
         }
+        else
+        {
+            rigidbody.velocity = Vector3.zero;
+        }
+    }
+
+    private void OnDied()
+    {
+        if (!doDie) return;
+
+        enabled = false;
+        onDiedEvent?.Invoke();
     }
 
     private void OnDrawGizmos()

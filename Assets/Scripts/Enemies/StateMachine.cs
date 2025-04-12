@@ -13,6 +13,7 @@ namespace Enemies
         public Dictionary<StateEnum, List<Transition>> stateTree;
 
         public bool isTransitioning = false;
+        private bool isDead = false;
 
         public void Init(EnemyAI self)
         {
@@ -46,7 +47,7 @@ namespace Enemies
                 },
                 { StateEnum.Attack, new List<Transition>()
                     {
-                        new Transition(StateEnum.Attack, StateEnum.Chase, (State state) => self.vec2player.magnitude > self.settings.maxAttackDistance + 0.2f, delay: 0.8f),
+                        new Transition(StateEnum.Attack, StateEnum.Chase, (State state) => self.vec2player.magnitude > self.settings.maxAttackDistance + 0.2f, delay: 1.2f),
                         new Transition(StateEnum.Attack, StateEnum.Idle, delay: 0.8f)
                     }
                 },
@@ -123,6 +124,14 @@ namespace Enemies
         private void OnStateChanged()
         {
             self.ChangeState(currentState.type);
+        }
+
+        public void Die()
+        {
+            if (isDead) return;
+
+            currentState.OnExit();
+            isDead = true;
         }
     }
 }

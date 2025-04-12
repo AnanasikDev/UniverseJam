@@ -37,7 +37,7 @@ namespace Enemies
                 {
                     animator.SetBool("Moving", true);
 
-                    if (Mathf.Abs(diff.x) > 0.1f) // to avoid jittering
+                    if (Mathf.Abs(diff.x) > 0.01f) // to avoid jittering
                         Flip(Mathf.Sign(diff.x));
                 }
                 else

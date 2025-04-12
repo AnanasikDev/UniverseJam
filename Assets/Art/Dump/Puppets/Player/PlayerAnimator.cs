@@ -8,7 +8,6 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Start()
     {
-        PlayerController.instance.playerDash.onDashedEvent += () => animator.SetTrigger("Dash");
         PlayerController.instance.healthComp.onDamagedEvent += (float val) => animator.SetTrigger("Hurt");
         PlayerController.instance.onMovingEvent += (Vector2 dir) =>
         {

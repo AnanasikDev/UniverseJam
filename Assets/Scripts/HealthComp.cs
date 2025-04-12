@@ -12,6 +12,8 @@ public class HealthComp : MonoBehaviour
 
     [Tooltip("Multiplier for the incoming damage")][SerializeField][Range(0, 10)] private float incomingDamageFactor = 1;
 
+    public bool IsAlive { get { return AbsoluteHealth > MinHealth; } }
+
     public HealthGroup group;
 
     /// <summary>
@@ -77,6 +79,8 @@ public class HealthComp : MonoBehaviour
 
     private void Update()
     {
+        if (!IsAlive) return;
+
         if (applyBleedingEffect)
         {
             Unbleed(bleedingRestoreSpeed * Time.deltaTime);
@@ -110,6 +114,8 @@ public class HealthComp : MonoBehaviour
 
     public virtual void TakeDamage(float value, float bleedingValue = 0.0f, float bleedingPowerFactor = 1.0f)
     {
+        if (!IsAlive) return;
+
         bleedingValue *= bleedingSpeedFactor;
         Bleed(bleedingValue, bleedingPowerFactor);
         value *= currentBleedingDamageFactor;

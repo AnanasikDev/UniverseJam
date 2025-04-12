@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 
 namespace Enemies
@@ -35,7 +34,7 @@ namespace Enemies
             float angle = Random.Range(0, Mathf.PI * 2);
             float radius = Random.Range(self.settings.randomWanderDistance.x, self.settings.randomWanderDistance.y);
 
-            target = (self.transform.position + PlayerController.instance.transform.position) / 2.0f + 
+            target = Vector3.Lerp(PlayerController.instance.transform.position, self.transform.position, self.vec2player.magnitude / 5.0f) + 
                     new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
         }
 
@@ -48,10 +47,7 @@ namespace Enemies
         {
             Vector3 vec = (target - self.transform.position);
 
-            if (!self.Move(vec.normalized * self.values.wanderSpeed * Time.deltaTime))
-            {
-                Debug.Log("Wandering failed");
-            }
+            self.Move(vec.normalized * self.values.wanderSpeed * Time.deltaTime);
         }
 
         public override void DrawGizmos()

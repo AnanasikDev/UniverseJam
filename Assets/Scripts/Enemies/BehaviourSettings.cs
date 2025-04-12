@@ -21,7 +21,8 @@ namespace Enemies
 
         [TitleGroup("Attack")]
         [Range(0, 9)] public float maxAttackDistance = 3;
-        [Range(0, 9)] public float minAttackDistance = 1.5f;
+        [Range(0, 9)] public float maxAttackApproachDistance = 2;
+        [Range(0, 9)] public float minAttackApproachDistance = 1.5f;
         [Range(0, 100)] public float damagePerHit = 20;
         [Range(0, 8)]   public float hitIntervalSeconds = 1;
 
