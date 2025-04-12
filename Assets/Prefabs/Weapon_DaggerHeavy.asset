@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Weapon_DaggerHeavy
   m_EditorClassIdentifier: 
   name: Dagger Heavy
-  damagePerUse: 9
+  damagePerUse: 11
   damageRandomization: 0.2
   reloadTimeSeconds: 0.8
   minDistance: 0

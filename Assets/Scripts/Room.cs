@@ -61,6 +61,7 @@ public class Room : MonoBehaviour
 
         IEnumerator DisableCollider()
         {
+            PlayerController.instance.healthComp.SetHealth(PlayerController.instance.healthComp.MaxHealth);
             yield return new WaitForSeconds(3);
             gateCollider.enabled = false;
             onUnlockedEvent?.Invoke(this);

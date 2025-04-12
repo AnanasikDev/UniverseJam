@@ -42,7 +42,7 @@ namespace Enemies
 
         public override void OnUpdate()
         {
-            if (Time.time - lastHitTime >= self.settings.hitIntervalSeconds)
+            if (Time.time - lastHitTime >= self.settings.hitIntervalSeconds && self.vec2player.magnitude <= self.settings.maxAttackDistance)
             {
                 lastHitTime = Time.time;
                 StartAttack();

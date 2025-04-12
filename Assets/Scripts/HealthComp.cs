@@ -124,6 +124,11 @@ public class HealthComp : MonoBehaviour
         SetHealth(AbsoluteHealth - value);
     }
 
+    public virtual void Regen(float value)
+    {
+        SetHealth(AbsoluteHealth + value);
+    }
+
     public virtual void SetHealth(float value)
     {
         float prevHealth = AbsoluteHealth;
