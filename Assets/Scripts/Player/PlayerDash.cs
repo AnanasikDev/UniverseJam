@@ -23,6 +23,8 @@ public class PlayerDash : MonoBehaviour
 
     private new Rigidbody rigidbody;
 
+    public event Action onDashedEvent;
+
     public void Init()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -59,6 +61,7 @@ public class PlayerDash : MonoBehaviour
         dashDirection = (dashTargetPosition - dashStartPosition).normalized;
         dashDirection.y = 0;
         PlayerController.instance.playerStamina.UseStamina(PlayerController.instance.playerStamina.dashStaminaCost);
+        onDashedEvent?.Invoke();
     }
 
     private void StopDashing()

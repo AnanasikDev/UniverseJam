@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private BaseWeapon mainWeapon;
-    [SerializeField] private BaseWeapon altWeapon;
+    public BaseWeapon mainWeapon;
+    public BaseWeapon altWeapon;
     [ShowInInspector][ReadOnly] public bool isAttacking { get; private set; } = false;
     [ReadOnly] public bool isUsingMain;
     [ReadOnly] public bool isUsingAlt;

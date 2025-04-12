@@ -42,6 +42,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public HealthComp healthComp;
     [HideInInspector] public PlayerStamina playerStamina;
 
+    public event Action<Vector2> onMovingEvent;
+    public event Action onStoppedEvent;
+
     public static PlayerController instance { get; private set; }
 
     private void Awake()
@@ -82,8 +85,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        bool wasMoving = IsMoving;
         inputHorizontal = GetMovementInput("Horizontal");
         inputVertical = GetMovementInput("Vertical");
+        if (wasMoving && !IsMoving)
+        {
+            onStoppedEvent?.Invoke();
+        }
         cursorDirection2D = Input.mousePosition - playerCamera.camera.WorldToScreenPoint(transform.position);
         cursorDirection = new Vector3(cursorDirection2D.x, 0, cursorDirection2D.y);
 
@@ -105,7 +113,9 @@ public class PlayerController : MonoBehaviour
             //rigidbody.MovePosition(transform.position + new Vector3(inputHorizontal * speedX, 0, inputVertical * speedZ) * Time.fixedDeltaTime);
             rigidbody.position = rigidbody.position + new Vector3(inputHorizontal * speedX, 0, inputVertical * speedZ) * Time.fixedDeltaTime;
             transform.position = rigidbody.position;
-            movementDirection = (transform.position - lastPosition).normalized;
+            Vector3 diff = (transform.position - lastPosition);
+            movementDirection = diff.normalized;
+            onMovingEvent?.Invoke(diff);
             lastPosition = transform.position;
         }
     }
