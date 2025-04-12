@@ -98,7 +98,7 @@ public class EnemyAI : MonoBehaviour
     {
         diff = new Vector3(diff.x, 0, diff.z);
         if (avoidOthers) diff = AvoidOthers(diff);
-        if (diff.sqrMagnitude < 0.1f) onMovingEvent?.Invoke(diff);
+        if (diff.sqrMagnitude > 0.05f) onMovingEvent?.Invoke(diff);
         return SetPosition(rigidbody.position + diff);
     }
 

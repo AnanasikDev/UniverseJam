@@ -26,7 +26,7 @@ namespace Enemies
 
         public override bool IsPossibleChangeTo()
         {
-            return totalStatesActive < World.instance.globalEnemiesSettings.maxAttackingEnemies && self.vec2player.magnitude <= self.settings.maxAttackDistance + 0.2f;
+            return totalStatesActive < World.instance.globalEnemiesSettings.maxAttackingEnemies && self.vec2player.magnitude <= self.settings.maxAttackApproachDistance + 0.2f;
         }
 
         public override void OnEnter()
@@ -66,7 +66,7 @@ namespace Enemies
         public override void DrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(self.transform.position, self.settings.maxAttackDistance);
+            Gizmos.DrawWireSphere(self.transform.position, self.settings.maxAttackApproachDistance);
         }
     }
 }

@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour
         playerDash = GetComponent<PlayerDash>();
         healthComp = GetComponent<HealthComp>();
         playerStamina = GetComponent<PlayerStamina>();
+
+        healthComp.onDiedEvent += OnDied;   
     }
 
     private void SetMovementInputFunction()
@@ -118,6 +120,15 @@ public class PlayerController : MonoBehaviour
             onMovingEvent?.Invoke(diff);
             lastPosition = transform.position;
         }
+        else
+        {
+            rigidbody.velocity = Vector3.zero;
+        }
+    }
+
+    private void OnDied()
+    {
+        enabled = false;
     }
 
     private void OnDrawGizmos()

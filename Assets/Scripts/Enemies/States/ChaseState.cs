@@ -39,7 +39,7 @@ namespace Enemies
         {
             Vector3 vec = self.vec2player;
 
-            float sign = vec.magnitude > self.settings.minAttackDistance ? 1 : -1;
+            float sign = vec.magnitude > self.settings.minAttackApproachDistance ? 1 : -1;
 
             self.Move(vec.normalized * sign * self.values.movementSpeed * Time.deltaTime);
         }
