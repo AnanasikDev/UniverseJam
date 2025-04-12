@@ -12,6 +12,8 @@ namespace Enemies
         public Dictionary<StateEnum, State> enum2state;
         public Dictionary<StateEnum, List<Transition>> stateTree;
 
+        public bool isTransitioning = false;
+
         public void Init(EnemyAI self)
         {
             this.self = self;
@@ -44,8 +46,8 @@ namespace Enemies
                 },
                 { StateEnum.Attack, new List<Transition>()
                     {
-                        new Transition(StateEnum.Attack, StateEnum.Chase, (State state) => self.vec2player.magnitude > self.settings.maxAttackDistance + 0.2f),
-                        new Transition(StateEnum.Attack, StateEnum.Idle)
+                        new Transition(StateEnum.Attack, StateEnum.Chase, (State state) => self.vec2player.magnitude > self.settings.maxAttackDistance + 0.2f, delay: 0.8f),
+                        new Transition(StateEnum.Attack, StateEnum.Idle, delay: 0.8f)
                     }
                 },
                 { StateEnum.Stealth, new List<Transition>()
@@ -89,18 +91,32 @@ namespace Enemies
 
         private bool GetNextState(out StateEnum state)
         {
+            state = StateEnum.Idle;
+            if (isTransitioning) return false;
+
             foreach (Transition transition in stateTree[currentState.type])
             {
-                if (transition.Condition(currentState) && 
-                    enum2state[transition.from].IsPossibleChangeFrom() && 
+                if (transition.Condition(currentState) &&
+                    enum2state[transition.from].IsPossibleChangeFrom() &&
                     enum2state[transition.to].IsPossibleChangeTo())
                 {
-                    state = transition.to;
-                    return true;
+                    if (transition.finished || transition.Start())
+                    {
+                        state = transition.to;
+                        transition.finished = false;
+                        return true;
+                    }
+                    else
+                    {
+                        isTransitioning = true;
+                        transition.onFinishedEvent += () =>
+                        {
+                            isTransitioning = false;
+                        };
+                    }
                 }
             }
 
-            state = StateEnum.Idle;
             return false;
         }
 

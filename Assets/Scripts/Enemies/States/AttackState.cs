@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Enemies
@@ -10,10 +11,12 @@ namespace Enemies
         public static int totalStatesActive = 0;
 
         private float lastHitTime;
+        public event Action onStartedAttacking;
 
         public AttackState(EnemyAI self) : base(self)
         {
             this.type = StateEnum.Attack;
+            self.animator.animatorCallback.onAttackPerformedEvent += FinishAttack;
         }
 
         public override bool IsPossibleChangeFrom()
@@ -42,13 +45,22 @@ namespace Enemies
             if (Time.time - lastHitTime >= self.settings.hitIntervalSeconds)
             {
                 lastHitTime = Time.time;
-                Hit();
+                StartAttack();
             }
         }
 
-        private void Hit()
+        private void StartAttack()
         {
-            PlayerController.instance.healthComp.TakeDamage(self.settings.damagePerHit);
+            onStartedAttacking?.Invoke();
+        }
+
+        private void FinishAttack()
+        {
+            if (self.vec2player.magnitude <= self.settings.maxAttackDistance)
+            {
+                Debug.Log("Hit player!");
+                PlayerController.instance.healthComp.TakeDamage(self.settings.damagePerHit);
+            }
         }
 
         public override void DrawGizmos()

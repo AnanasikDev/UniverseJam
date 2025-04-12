@@ -19,10 +19,11 @@ MonoBehaviour:
   useWander: 1
   maxChaseDistance: 20
   randomMovementSpeed: {x: 2.1, y: 2.6}
-  maxAttackDistance: 2
-  minAttackDistance: 1.5
-  damagePerHit: 20
+  maxAttackDistance: 2.5
+  minAttackDistance: 1
+  damagePerHit: 17
   hitIntervalSeconds: 1
+  secondsBeforeFirstHit: 1
   maxFleeDistance: 12
   randomFleeSpeed: {x: 2, y: 3}
   minFleeTimeSeconds: 3

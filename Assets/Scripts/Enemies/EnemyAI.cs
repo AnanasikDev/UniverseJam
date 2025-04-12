@@ -1,5 +1,6 @@
 using Enemies;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,10 +25,16 @@ public class EnemyAI : MonoBehaviour
 
     [HideInInspector] public Room spawnRoom;
 
+    public event Action<Vector2> onMovingEvent;
+    public event Action onAttackedEvent;
+
+    [HideInInspector] public EnemyAnimator animator;
+
     public void Init()
     {
         health = GetComponent<HealthComp>();
         rigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<EnemyAnimator>();
         health.onDiedEvent += OnDied;
 
         values = new EntityBehaviourValues();
@@ -35,6 +42,7 @@ public class EnemyAI : MonoBehaviour
 
         stateMachine = new StateMachine();
         stateMachine.Init(this);
+        GetComponent<EnemyAnimator>().Init();
     }
 
     public void ChangeState(StateEnum state)
@@ -49,7 +57,7 @@ public class EnemyAI : MonoBehaviour
             { StateEnum.Wander, Color.black },
         };
 
-        renderer.material.color = getclr[state];
+        //renderer.material.color = getclr[state];
     }
 
     private Vector3 AvoidOthers(Vector3 direction)
@@ -90,6 +98,7 @@ public class EnemyAI : MonoBehaviour
     {
         diff = new Vector3(diff.x, 0, diff.z);
         if (avoidOthers) diff = AvoidOthers(diff);
+        if (diff.sqrMagnitude < 0.1f) onMovingEvent?.Invoke(diff);
         return SetPosition(rigidbody.position + diff);
     }
 
@@ -99,8 +108,6 @@ public class EnemyAI : MonoBehaviour
         World.totalKills++;
         World.instance.enemies.Remove(this);
         World.instance.healthEntities.Remove(health);
-
-        Destroy(gameObject);
     }
 
     private void Update()
