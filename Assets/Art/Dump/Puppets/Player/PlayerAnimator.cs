@@ -14,7 +14,8 @@ public class PlayerAnimator : MonoBehaviour
             if (dir.x != 0)
             {
                 animator.SetBool("IsRunning", true);
-                Flip(Mathf.Sign(dir.x));
+                if (Mathf.Abs(dir.x) > 0.001f)
+                    Flip(Mathf.Sign(dir.x));
             }
             else
             {

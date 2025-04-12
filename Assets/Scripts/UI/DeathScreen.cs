@@ -7,10 +7,13 @@ public class DeathScreen : MonoBehaviour
 {
     [SerializeField] private CanvasGroup ui;
     [SerializeField] private CanvasGroup blackscreen;
+    float blackScreenDuration = 1.25f;
 
     private void Start()
     {
         PlayerController.instance.onDiedEvent += ShowUI;
+        blackscreen.alpha = 1;
+        blackscreen.DOFade(0, blackScreenDuration);
     }
 
     private void OnDestroy()
@@ -32,13 +35,11 @@ public class DeathScreen : MonoBehaviour
 
     public void Restart()
     {
-        float duration = 1.25f;
-        //blackscreen.DOFade(0, duration);
+        blackscreen.DOFade(1, blackScreenDuration);
         IEnumerator reload()
         {
-            yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(blackScreenDuration);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            //blackscreen.DOFade(1, duration);
         }
 
         StartCoroutine(reload());

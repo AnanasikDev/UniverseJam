@@ -27,7 +27,8 @@ namespace Enemies
                 if (diff.x != 0)
                 {
                     animator.SetBool("IsRunning", true);
-                    Flip(Mathf.Sign(diff.x));
+                    if (Mathf.Abs(diff.x) > 0.001f)
+                        Flip(Mathf.Sign(diff.x));
                 }
                 else
                 {
@@ -48,6 +49,11 @@ namespace Enemies
 
         }
 
+        private void OnDisable()
+        {
+            if (PlayerController.instance) PlayerController.instance.onDiedEvent -= OnPlayerDied;
+        }
+
         private void OnPlayerDied()
         {
             Room.currentRoom.Unlock(1);
@@ -56,8 +62,10 @@ namespace Enemies
             state.target = World.instance.rooms.Find(r => r.index == 1).gateCollider.transform;
         }
 
-        private void Flip(float sign)
+        public override void Flip(float sign)
         {
+            if (!CanFlip()) return;
+            base.Flip(sign);
             model.localScale = new Vector3(Mathf.Abs(model.localScale.x) * -sign, model.localScale.y, model.localScale.z);
         }
     }

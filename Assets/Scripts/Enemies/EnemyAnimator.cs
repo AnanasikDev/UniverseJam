@@ -32,8 +32,7 @@ namespace Enemies
                 if (diff.x != 0)
                 {
                     animator.SetBool("Moving", true);
-
-                    if (Mathf.Abs(diff.x) > 0.01f) // to avoid jittering
+                    if (Mathf.Abs(diff.x) > 0.001f)
                         Flip(Mathf.Sign(diff.x));
                 }
                 else
@@ -48,8 +47,10 @@ namespace Enemies
             };
         }
 
-        private void Flip(float sign)
+        public override void Flip(float sign)
         {
+            if (!CanFlip()) return;
+            base.Flip(sign);
             model.localScale = new Vector3(Mathf.Abs(model.localScale.x) * sign, model.localScale.y, model.localScale.z);
         }
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossScene : MonoBehaviour
 {
@@ -74,6 +75,13 @@ public class BossScene : MonoBehaviour
 
         StartCoroutine(startSpawning());
         World.instance.globalEnemiesSettings.maxAttackingEnemies = newMaxAttackingAmount;
+        PlayerController.instance.onDiedEvent += LoadEnding;
+    }
+
+    private void LoadEnding()
+    {
+        PlayerController.instance.onDiedEvent -= LoadEnding;
+        SceneManager.LoadScene(1);
     }
 
     private void OnDrawGizmos()
