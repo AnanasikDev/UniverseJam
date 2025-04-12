@@ -6,7 +6,8 @@ using UnityEngine.Assertions;
 public class UIProgressShaderBar : AbstractUIProgress
 {
     [SerializeField][ReadOnly] private float width;
-    [SerializeField] private string parameter;
+    [SerializeField] private string progressParam;
+    [SerializeField] private string colorParam;
 
     private void SetDoAnimateColor()
     {
@@ -27,8 +28,8 @@ public class UIProgressShaderBar : AbstractUIProgress
     public override void SetValue01Instantly(float value)
     {
         Value = value;
-        foreground.material.SetFloat(parameter, value);
-        if (doAnimateForegroundColor) foreground.color = GetForegroundColor(Value);
+        foreground.material.SetFloat(progressParam, value);
+        if (doAnimateForegroundColor) foreground.material.SetColor(colorParam, GetForegroundColor(Value));
     }
 
     public override void SetValue01(float value)
@@ -38,8 +39,8 @@ public class UIProgressShaderBar : AbstractUIProgress
         float diff = Value - prevValue;
         if (diff == 0) return; // nothing changed;
 
-        foreground.material.DOFloat(value, parameter, Mathf.Sqrt(Mathf.Abs(diff)));
+        foreground.material.DOFloat(value, progressParam, Mathf.Sqrt(Mathf.Abs(diff)));
 
-        if (doAnimateForegroundColor) foreground.color = GetForegroundColor(Value);
+        if (doAnimateForegroundColor) foreground.material.DOColor(GetForegroundColor(Value), colorParam, Mathf.Sqrt(Mathf.Abs(diff)));
     }
 }
