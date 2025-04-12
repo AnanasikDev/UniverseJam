@@ -17,6 +17,7 @@ namespace Enemies
 
             animator.SetFloat("MovementSpeedFac", self.settings.walkingAnimationSpeed);
             animator.SetFloat("AttackSpeedFac", self.settings.attackAnimationSpeed);
+            animator.SetFloat("DeathSpeedFac", self.settings.deathAnimationSpeed);
 
             self.health.onDamagedEvent += (float value) => animator.SetTrigger("Hurt");
             ((AttackState)self.stateMachine.enum2state[StateEnum.Attack]).onStartedAttacking += () =>
@@ -28,12 +29,8 @@ namespace Enemies
             {
                 animator.SetTrigger("Dead");
                 self.enabled = false;
-                IEnumerator wait()
-                {
-                    yield return new WaitForSeconds(2);
-                    Destroy(gameObject);
-                }
-                StartCoroutine(wait());
+                self.health.UIBleedingBarInstance.gameObject.SetActive(false);
+                self.health.UIHealthBarInstance.gameObject.SetActive(false);
             };
             self.onMovingEvent += (Vector2 diff) =>
             {

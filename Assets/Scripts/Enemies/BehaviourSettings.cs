@@ -18,6 +18,7 @@ namespace Enemies
         [TitleGroup("Animations")]
         public float walkingAnimationSpeed;
         public float attackAnimationSpeed;
+        public float deathAnimationSpeed;
 
         [TitleGroup("Chase")]
         [Range(0, 40)] public float maxChaseDistance = 8;
