@@ -133,4 +133,9 @@ public class EnemyAI : MonoBehaviour
             onStoppedEvent?.Invoke();
         }
     }
+
+    private void FixedUpdate()
+    {
+        stateMachine.FixedUpdate();
+    }
 }

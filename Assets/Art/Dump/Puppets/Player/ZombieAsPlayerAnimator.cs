@@ -39,6 +39,21 @@ namespace Enemies
             {
                 animator.SetBool("IsRunning", false);
             };
+
+            PlayerController.instance.onDiedEvent += OnPlayerDied;
+        }
+
+        private void Update()
+        {
+
+        }
+
+        private void OnPlayerDied()
+        {
+            Room.currentRoom.Unlock(1);
+            ChaseState state = (ChaseState)self.stateMachine.ForceNewState(StateEnum.Chase);
+            self.stateMachine.isLocked = true;
+            state.target = World.instance.rooms.Find(r => r.index == 1).gateCollider.transform;
         }
 
         private void Flip(float sign)

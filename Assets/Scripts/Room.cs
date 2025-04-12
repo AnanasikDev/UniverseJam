@@ -53,7 +53,7 @@ public class Room : MonoBehaviour
         }
     }
 
-    public void Unlock()
+    public void Unlock(float delay = 2.5f)
     {
         locked = false;
         gateRenderer.material.SetFloat("_TimeWhenFadeAwayStarted", Time.time);
@@ -63,7 +63,7 @@ public class Room : MonoBehaviour
         IEnumerator DisableCollider()
         {
             PlayerController.instance.healthComp.SetHealth(PlayerController.instance.healthComp.MaxHealth);
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(delay);
             gateCollider.enabled = false;
             onUnlockedEvent?.Invoke(this);
         }

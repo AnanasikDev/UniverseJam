@@ -9,5 +9,6 @@ namespace Enemies
         [Range(0, 10)] public int maxChasingEnemies = 3;
         [Range(0, 10)] public int maxStealthEnemies = 2;
         [Range(0, 10)] public int maxFleeingEnemies = 2;
+        [Range(0, 10)] public int maxDashingEnemies = 1;
     }
 }

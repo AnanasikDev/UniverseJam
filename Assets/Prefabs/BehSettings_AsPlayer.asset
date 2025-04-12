@@ -17,6 +17,7 @@ MonoBehaviour:
   useFlee: 0
   useStealth: 1
   useWander: 0
+  useDash: 1
   walkingAnimationSpeed: 1
   attackAnimationSpeed: 1
   attackExitTime: 0.1
@@ -39,3 +40,6 @@ MonoBehaviour:
   randomWanderDistance: {x: 6, y: 12}
   randomWanderSpeed: {x: 0.9, y: 1.3}
   wanderChance: 40
+  dashDistance: 3.5
+  randomDashChance: {x: 0.7895806, y: 0.92889273}
+  dashSpeed: 18

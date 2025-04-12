@@ -1,3 +1,4 @@
+using UnityEditor.Search;
 using UnityEngine;
 
 namespace Enemies
@@ -8,6 +9,8 @@ namespace Enemies
         /// The number of currently running state machines where this type of state is active.
         /// </summary>
         public static int totalStatesActive = 0;
+
+        public Transform target;
 
         public ChaseState(EnemyAI self) : base(self)
         {
@@ -28,6 +31,7 @@ namespace Enemies
         {
             base.OnEnter();
             totalStatesActive++;
+            target = PlayerController.instance.transform;
         }
 
         public override void OnExit()
@@ -37,7 +41,7 @@ namespace Enemies
 
         public override void OnUpdate()
         {
-            Vector3 vec = self.vec2player;
+            Vector3 vec = (target.transform.position - self.transform.position);
 
             float sign = vec.magnitude > self.settings.minAttackApproachDistance ? 1 : -1;
 

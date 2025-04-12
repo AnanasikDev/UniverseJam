@@ -17,6 +17,7 @@ namespace Enemies
         }
         public abstract void OnExit();
         public abstract void OnUpdate();
+        public virtual void OnFixedUpdate() { }
 
         public abstract bool IsPossibleChangeFrom();
         public abstract bool IsPossibleChangeTo();
@@ -31,6 +32,7 @@ namespace Enemies
         Attack,
         Stealth,
         Flee,
-        Wander
+        Wander,
+        Dash
     }
 }
