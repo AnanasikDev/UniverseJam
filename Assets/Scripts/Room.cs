@@ -15,17 +15,26 @@ public class Room : MonoBehaviour
     public BoxCollider gateCollider;
     public bool locked = true;
     public static Room currentRoom;
+    public static int lastEnteredRoomIndex = 0;
     public static event Action<Room> onUnlockedEvent;
 
     [SerializeField][ReadOnly] private List<EnemyAI> enemies;
 
     public void Init()
     {
+        lastEnteredRoomIndex = 0;
         enemies = World.instance.enemies.Where(e => bounds.bounds.Contains(e.transform.position)).ToList();
         foreach (var enemy in enemies)
         {
             enemy.spawnRoom = this;
-            enemy.Init();
+            if (enemy.autoInit)
+            {
+                enemy.Init();
+            }
+            else
+            {
+                enemy.enabled = false;
+            }
         }
 
         HealthComp.onAnyDiedEvent += TryUnlock;
@@ -66,6 +75,14 @@ public class Room : MonoBehaviour
             yield return new WaitForSeconds(delay);
             gateCollider.enabled = false;
             onUnlockedEvent?.Invoke(this);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (this == currentRoom && other.CompareTag("Player"))
+        {
+            lastEnteredRoomIndex = index;
         }
     }
 

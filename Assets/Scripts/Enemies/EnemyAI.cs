@@ -8,6 +8,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     [HideInInspector] public HealthComp health;
+    public bool autoInit = true;
 
     public BehaviourSettings settings;
     public EntityBehaviourValues values;
@@ -115,11 +116,13 @@ public class EnemyAI : MonoBehaviour
         World.totalKills++;
         World.instance.enemies.Remove(this);
         World.instance.healthEntities.Remove(health);
+        Destroy(rigidbody);
     }
 
     private void OnDestroy()
     {
-        stateMachine.Die();
+        if (stateMachine != null)
+            stateMachine.Die();
     }
 
     private void Update()

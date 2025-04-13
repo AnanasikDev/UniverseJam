@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Enemies;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ public class BossScene : MonoBehaviour
 {
     [SerializeField] private GameObject block;
     [SerializeField] private string bossGameobjectName = "Boss";
+    [SerializeField] private EnemyAI boss;
 
     [SerializeField] private EnemyAI[] enemyPrefabs;
     [SerializeField] private Transform targetTransform;
@@ -20,6 +22,9 @@ public class BossScene : MonoBehaviour
     [SerializeField] private float initIntevalSeconds = 3f;
     private int currentAmount = 0;
     private int defaultMaxAttackingAmount;
+
+    [SerializeField] private CanvasGroup blackscreen;
+    float blackScreenDuration = 1.25f;
 
     private void Start()
     {
@@ -81,7 +86,17 @@ public class BossScene : MonoBehaviour
     private void LoadEnding()
     {
         PlayerController.instance.onDiedEvent -= LoadEnding;
-        SceneManager.LoadScene(1);
+
+        blackscreen.DOFade(1, blackScreenDuration);
+        IEnumerator reload()
+        {
+            yield return new WaitForSeconds(blackScreenDuration);
+            SceneManager.LoadScene(1);
+            blackscreen.alpha = 1;
+            blackscreen.DOFade(0, blackScreenDuration);
+        }
+
+        StartCoroutine(reload());
     }
 
     private void OnDrawGizmos()

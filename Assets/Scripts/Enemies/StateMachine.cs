@@ -34,7 +34,7 @@ namespace Enemies
             {
                 { StateEnum.Idle, new List<Transition>() 
                     {   
-                        new Transition(StateEnum.Idle, StateEnum.Chase, (State state) => Room.currentRoom.index >= self.spawnRoom.index), 
+                        new Transition(StateEnum.Idle, StateEnum.Chase, (State state) => Room.currentRoom.index >= self.spawnRoom.index && (!self.settings.requirePlayerInTheRoom || Room.lastEnteredRoomIndex == Room.currentRoom.index)), 
                         new Transition(StateEnum.Idle, StateEnum.Wander, 
                             (State state) => self.vec2player.magnitude > self.settings.maxChaseDistance * 1.5f && Random.Range(0.0f, 1.0f) < (self.settings.wanderChance / 100.0f))
                     } 

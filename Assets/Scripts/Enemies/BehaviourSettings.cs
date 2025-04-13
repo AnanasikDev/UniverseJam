@@ -9,6 +9,7 @@ namespace Enemies
         [TitleGroup("Agent")]
         [Range(0, 12)] public float avoidanceRadius = 1.5f;
         [Range(0, 12)] public float weight = 1.5f;
+        public bool requirePlayerInTheRoom = false;
 
         [TitleGroup("States")]
         public bool useFlee = true;
