@@ -38075,8 +38075,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+<<<<<<< HEAD
   - time: 0.083333336
     functionName: Swipe
+=======
+  - time: 0.20833333
+    functionName: OnAttackPerformed
+>>>>>>> 7dada15e54a59bbb388d3c980c56b6618cd1c09f
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
