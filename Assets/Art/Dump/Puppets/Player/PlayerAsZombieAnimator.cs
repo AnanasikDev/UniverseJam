@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAnimator : MonoBehaviour
+public class PlayerAsZombieAnimator : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform model;
@@ -13,36 +13,37 @@ public class PlayerAnimator : MonoBehaviour
         {
             if (dir.x != 0)
             {
-                animator.SetBool("IsRunning", true);
-                if (Mathf.Abs(dir.x) > 0.001f)
-                    Flip(Mathf.Sign(dir.x));
+                animator.SetBool("Moving", true);
+                Flip(Mathf.Sign(dir.x));
             }
             else
             {
-                animator.SetBool("IsRunning", false);
+                animator.SetBool("Moving", false);
             }
         };
 
         PlayerController.instance.onStoppedEvent += () =>
         {
-            animator.SetBool("IsRunning", false);
+            animator.SetBool("Moving", false);
         };
 
         PlayerController.instance.playerAttack.mainWeapon.onUsedEvent += () =>
         {
-            if (Random.Range(0.0f, 1.0f) > 0.5f)
-                animator.SetTrigger("Attack1");
-            else
-                animator.SetTrigger("Attack2");
+            animator.SetTrigger("Attack");
         };
         PlayerController.instance.playerAttack.altWeapon.onUsedEvent += () =>
         {
-            animator.SetTrigger("Attack3");
+            animator.SetTrigger("Attack");
+        };
+
+        PlayerController.instance.onDiedEvent += () =>
+        {
+            animator.SetTrigger("Dead");
         };
     }
 
     private void Flip(float sign)
     {
-        model.localScale = new Vector3(Mathf.Abs(model.localScale.x) * -sign, model.localScale.y, model.localScale.z);
+        model.localScale = new Vector3(Mathf.Abs(model.localScale.x) * sign, model.localScale.y, model.localScale.z);
     }
 }

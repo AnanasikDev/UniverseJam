@@ -8,6 +8,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     [HideInInspector] public HealthComp health;
+    public bool autoInit = true;
 
     public BehaviourSettings settings;
     public EntityBehaviourValues values;
@@ -30,13 +31,13 @@ public class EnemyAI : MonoBehaviour
     public event Action onAttackedEvent;
     private bool isMoving;
 
-    [HideInInspector] public EnemyAnimator animator;
+    [HideInInspector] public AbstractEnemyAnimator animator;
 
     public void Init()
     {
         health = GetComponent<HealthComp>();
         rigidbody = GetComponent<Rigidbody>();
-        animator = GetComponent<EnemyAnimator>();
+        animator = GetComponent<AbstractEnemyAnimator>();
         health.onDiedEvent += OnDied;
 
         values = new EntityBehaviourValues();
@@ -115,11 +116,13 @@ public class EnemyAI : MonoBehaviour
         World.totalKills++;
         World.instance.enemies.Remove(this);
         World.instance.healthEntities.Remove(health);
+        Destroy(rigidbody);
     }
 
     private void OnDestroy()
     {
-        stateMachine.Die();
+        if (stateMachine != null)
+            stateMachine.Die();
     }
 
     private void Update()
@@ -132,5 +135,10 @@ public class EnemyAI : MonoBehaviour
         {
             onStoppedEvent?.Invoke();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        stateMachine.FixedUpdate();
     }
 }

@@ -52,6 +52,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void UpdatePreview()
     {
+        if (aimObject == null) return;
+
         float dir = GetAngleBetweenVectors(PlayerController.instance.cursorDirection2D.normalized, Vector2.right)
             * Mathf.Rad2Deg;
         float weaponAngle = isUsingAlt ? altWeapon.data.angle : mainWeapon.data.angle;

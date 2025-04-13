@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 2489957}
   - component: {fileID: 2489956}
   - component: {fileID: 2489955}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Room 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 45975081}
   - component: {fileID: 45975080}
   - component: {fileID: 45975079}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Room 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1960,6 +1960,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0284755, y: 6.518783, z: 1}
   m_Center: {x: -0.0019147354, y: 0.49247012, z: 0}
+--- !u!1 &165476979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6746218915820968487, guid: 389f39cdf510b4a4a9e5ce86054b79b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1791197636}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &165476983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165476979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a0692ab77b2ce4eb9ff9c1eb1d75ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &198173555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1971,7 +1989,7 @@ GameObject:
   - component: {fileID: 198173558}
   - component: {fileID: 198173557}
   - component: {fileID: 198173556}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Room 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9543,7 +9561,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -1.5727539, y: 0}
-  m_SizeDelta: {x: 541.0249, y: 292.05}
+  m_SizeDelta: {x: 541.0249, y: 256.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1101912225
 MonoBehaviour:
@@ -9558,7 +9576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.122641504, g: 0.12109884, b: 0.12109884, a: 0.9882353}
+  m_Color: {r: 0.058000002, g: 0.058000002, b: 0.058000002, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11587,7 +11605,7 @@ GameObject:
   - component: {fileID: 1252559149}
   - component: {fileID: 1252559148}
   - component: {fileID: 1252559147}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Room 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11620,7 +11638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounds: {fileID: 1252559147}
-  index: 0
+  index: 5
   gateRenderer: {fileID: 1413538015}
   gateCollider: {fileID: 1413538012}
   locked: 1
@@ -11748,7 +11766,7 @@ GameObject:
   - component: {fileID: 1275738019}
   - component: {fileID: 1275738018}
   - component: {fileID: 1275738017}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Room 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14563,7 +14581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560919528}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -0.00000023841858, z: -3.4}
+  m_LocalPosition: {x: 0, y: -0.00000023841858, z: -3.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17557,6 +17575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1291580481}
   bossGameobjectName: Boss
+  boss: {fileID: 0}
   enemyPrefabs:
   - {fileID: 1701342960031030122, guid: 687e45f1558a39b4d87ee60b5b4effdf, type: 3}
   targetTransform: {fileID: 313560555}
@@ -17566,6 +17585,7 @@ MonoBehaviour:
   newMaxAttackingAmount: 15
   intervalSeconds: 0.6
   initIntevalSeconds: 3
+  blackscreen: {fileID: 2128318905}
 --- !u!4 &1860516509
 Transform:
   m_ObjectHideFlags: 0
@@ -18736,7 +18756,7 @@ GameObject:
   - component: {fileID: 2070478425}
   - component: {fileID: 2070478424}
   - component: {fileID: 2070478423}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Room 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

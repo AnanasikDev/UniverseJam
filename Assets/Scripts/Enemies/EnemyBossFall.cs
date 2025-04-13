@@ -7,6 +7,13 @@ namespace Enemies
     {
         private new Rigidbody rigidbody;
         private EnemyAI ai;
+        [SerializeField] private bool initOnAwake;
+        
+        private void Awake()
+        {
+            if (initOnAwake) Init();
+        }
+
         public void Init()
         {
             rigidbody = GetComponent<Rigidbody>();
@@ -27,7 +34,7 @@ namespace Enemies
                 ai.enabled = true;
                 ai.spawnRoom = Room.currentRoom;
                 ai.Init();
-                //Destroy(this);
+                Destroy(this);
             }
         }
     }

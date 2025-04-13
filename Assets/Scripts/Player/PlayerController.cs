@@ -4,8 +4,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerAttack))]
 [RequireComponent(typeof(PlayerCamera))]
-[RequireComponent(typeof(PlayerDash))]
-[RequireComponent(typeof(PlayerStamina))]
 [RequireComponent(typeof(HealthComp))]
 public class PlayerController : MonoBehaviour
 {
@@ -77,12 +75,12 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        playerDash.Init();
+        playerDash?.Init();
 
         defaultPosition = transform.position;
         playerCamera.Init();
 
-        playerStamina.Init();
+        playerStamina?.Init();
 
         SetMovementInputFunction();
     }
@@ -105,9 +103,16 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        playerDash.UpdateDashing();
-        if (!playerDash.blockMovementWhenDashing || !playerDash.isDashing)
+        if (playerDash)
+        {
+            playerDash.UpdateDashing();
+            if (!playerDash.blockMovementWhenDashing || !playerDash.isDashing)
+                UpdateMotion();
+        }
+        else
+        {
             UpdateMotion();
+        }
     }
 
     private void UpdateMotion()

@@ -9,15 +9,18 @@ namespace Enemies
         [TitleGroup("Agent")]
         [Range(0, 12)] public float avoidanceRadius = 1.5f;
         [Range(0, 12)] public float weight = 1.5f;
+        public bool requirePlayerInTheRoom = false;
 
         [TitleGroup("States")]
         public bool useFlee = true;
         public bool useStealth = true;
         public bool useWander = true;
+        public bool useDash = false;
 
         [TitleGroup("Animations")]
         public float walkingAnimationSpeed;
         public float attackAnimationSpeed;
+        public float attackExitTime = 1.2f;
         public float deathAnimationSpeed;
 
         [TitleGroup("Chase")]
@@ -47,5 +50,10 @@ namespace Enemies
         [ShowIf("useWander")][MinMaxSlider(0, 25, showFields:true)] public Vector2 randomWanderDistance = new Vector2(6, 12);
         [ShowIf("useWander")][MinMaxSlider(0, 5, showFields: true)] public Vector2 randomWanderSpeed = new Vector2(0.9f, 1.3f);
         [ShowIf("useWander")][SuffixLabel("%")][Range(0, 100)] public float wanderChance = 25;
+
+        [TitleGroup("Dash")]
+        [ShowIf("useDash")][Range(0, 6)] public float dashDistance = 4;
+        [ShowIf("useDash")][MinMaxSlider(0, 1)] public Vector2 randomDashChance = new Vector2(0.1f, 0.2f);
+        [ShowIf("useDash")][Range(0, 20)] public float dashSpeed = 9;
     }
 }

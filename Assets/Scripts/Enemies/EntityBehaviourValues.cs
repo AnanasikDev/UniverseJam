@@ -11,6 +11,7 @@ namespace Enemies
         public float stealthTargetDistance;
         public float wanderSpeed;
         public float fleeChance;
+        public float dashChance;
 
         public void Init(BehaviourSettings settings)
         {
@@ -21,6 +22,7 @@ namespace Enemies
             wanderSpeed = Random.Range(settings.randomWanderSpeed.x, settings.randomWanderSpeed.y);
             stealthTargetDistance = Random.Range(settings.randomStealthTargetDistance.x, settings.randomStealthTargetDistance.y);
             fleeChance = Random.Range(settings.randomFleeChance.x, settings.randomFleeChance.y);
+            dashChance = Random.Range(settings.randomDashChance.x, settings.randomDashChance.y);
         }
     }
 }
