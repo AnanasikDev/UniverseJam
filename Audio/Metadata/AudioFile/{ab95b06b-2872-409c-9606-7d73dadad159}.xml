@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{ab95b06b-2872-409c-9606-7d73dadad159}">
+		<property name="assetPath">
+			<value>521590__fission9__hiking-boot-footsteps-on-stone (1).wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>3.5490833333333334</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a9a10d87-9026-4198-b822-c24e23e827bb}</destination>
+		</relationship>
+	</object>
+</objects>

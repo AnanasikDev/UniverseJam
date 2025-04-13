@@ -54,8 +54,15 @@ public class AudioManager : MonoBehaviour
         masterBus = RuntimeManager.GetBus("bus:/");
         musicBus = RuntimeManager.GetBus("bus:/Music");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
+
+
+
     }
 
+    private void Start()
+    {
+        PlayOneShotString("BGnoise", Vector3.zero);
+    }
     private EventInstance ambienceEventInstance;
     private EventInstance musicEventInstance;    
     public void InitializeMusic(EventReference musicEventReference)

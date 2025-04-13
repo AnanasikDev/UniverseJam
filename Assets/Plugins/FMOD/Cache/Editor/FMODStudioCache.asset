@@ -1,5 +1,180 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6614508386832581905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Audio/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638800771379883174
+  FileSizes:
+  - Name: Desktop
+    Value: 5299072
+  Exists: 1
+--- !u!114 &-5571223333750558137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ZombieSoeak
+  m_EditorClassIdentifier: 
+  Path: event:/ZombieSoeak
+  Guid:
+    Data1: 1301883697
+    Data2: 1301292141
+    Data3: 549879704
+    Data4: -800245531
+  Banks:
+  - {fileID: -6614508386832581905}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2500
+--- !u!114 &-4852219621336296080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGMusic
+  m_EditorClassIdentifier: 
+  Path: event:/BGMusic
+  Guid:
+    Data1: 1666494128
+    Data2: 1276681765
+    Data3: 250071434
+    Data4: 1188082009
+  Banks:
+  - {fileID: -3074202254371489540}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 458524
+--- !u!114 &-3074202254371489540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Audio/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638800741536342372
+  FileSizes:
+  - Name: Desktop
+    Value: 4752032
+  Exists: 1
+--- !u!114 &-1376651388494250656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ZombieDead
+  m_EditorClassIdentifier: 
+  Path: event:/ZombieDead
+  Guid:
+    Data1: 6830085
+    Data2: 1128316597
+    Data3: 1218112661
+    Data4: -431492867
+  Banks:
+  - {fileID: -6614508386832581905}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2500
+--- !u!114 &-1187049096494709273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGnoise
+  m_EditorClassIdentifier: 
+  Path: event:/BGnoise
+  Guid:
+    Data1: -2115452372
+    Data2: 1105597909
+    Data3: 318208912
+    Data4: 781196039
+  Banks:
+  - {fileID: -6614508386832581905}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 458524
+--- !u!114 &-173844879799838306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Step
+  m_EditorClassIdentifier: 
+  Path: event:/Step
+  Guid:
+    Data1: -1667468259
+    Data2: 1103821078
+    Data3: -730732392
+    Data4: -1253876183
+  Banks:
+  - {fileID: -6614508386832581905}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,14 +190,53 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: 3576584833939708423}
   - {fileID: 4042141504673364430}
-  EditorEvents: []
+  - {fileID: -3074202254371489540}
+  - {fileID: -6614508386832581905}
+  EditorEvents:
+  - {fileID: -173844879799838306}
+  - {fileID: 6193563774264000652}
+  - {fileID: 8558515422721474343}
+  - {fileID: 7215999084712778299}
+  - {fileID: 300735989589229185}
+  - {fileID: -1187049096494709273}
+  - {fileID: -4852219621336296080}
+  - {fileID: 4202349337645333444}
+  - {fileID: -1376651388494250656}
+  - {fileID: -5571223333750558137}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4042141504673364430}
   StringsBanks:
   - {fileID: 3576584833939708423}
-  cacheTime: 638796268921833156
+  cacheTime: 638800771379883174
   cacheVersion: 131624
+--- !u!114 &300735989589229185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ZombiePreAttack
+  m_EditorClassIdentifier: 
+  Path: event:/ZombiePreAttack
+  Guid:
+    Data1: -1204457864
+    Data2: 1149106284
+    Data3: -1783884617
+    Data4: -1238109594
+  Banks:
+  - {fileID: -6614508386832581905}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2045
 --- !u!114 &3576584833939708423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38,10 +252,10 @@ MonoBehaviour:
   Path: Audio/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638796268921833156
+  lastModified: 638800769467272609
   FileSizes:
   - Name: Desktop
-    Value: 712
+    Value: 1328
   Exists: 1
 --- !u!114 &4042141504673364430
 MonoBehaviour:
@@ -58,8 +272,116 @@ MonoBehaviour:
   Path: Audio/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638796268921823057
+  lastModified: 638800769467262596
   FileSizes:
   - Name: Desktop
-    Value: 1036
+    Value: 1340
   Exists: 1
+--- !u!114 &4202349337645333444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Slam
+  m_EditorClassIdentifier: 
+  Path: event:/Slam
+  Guid:
+    Data1: 772096864
+    Data2: 1152375330
+    Data3: 1351398292
+    Data4: -520868822
+  Banks:
+  - {fileID: -6614508386832581905}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2500
+--- !u!114 &6193563774264000652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/DaggerSwipe
+  m_EditorClassIdentifier: 
+  Path: event:/DaggerSwipe
+  Guid:
+    Data1: -1085696967
+    Data2: 1174574930
+    Data3: 1550480026
+    Data4: -1653467698
+  Banks:
+  - {fileID: -6614508386832581905}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &7215999084712778299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ZombieSwipe
+  m_EditorClassIdentifier: 
+  Path: event:/ZombieSwipe
+  Guid:
+    Data1: -1599210508
+    Data2: 1119470482
+    Data3: 152767409
+    Data4: 1366176441
+  Banks:
+  - {fileID: -6614508386832581905}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &8558515422721474343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BareStep
+  m_EditorClassIdentifier: 
+  Path: event:/BareStep
+  Guid:
+    Data1: -311629545
+    Data2: 1292004155
+    Data3: 218042280
+    Data4: -2074033487
+  Banks:
+  - {fileID: -6614508386832581905}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 15
+  Length: 2000
