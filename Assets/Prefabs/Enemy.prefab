@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 0}
+  autoInit: 1
   settings: {fileID: 11400000, guid: 4fc2ba0b26254b2499c81869f3642a3a, type: 2}
   rigidbody: {fileID: 5495580765360236000}
   renderer: {fileID: 1701342960178197739}
@@ -169,6 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a11643f1f85744bb960baf25f87d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbsoluteHealth: 100
+  MinHealth: 0
+  MaxHealth: 100
   incomingDamageFactor: 1
   group: 0
   applyBleedingEffect: 1
@@ -183,6 +187,7 @@ MonoBehaviour:
   UIBarPrefab: {fileID: 7046704902058888709, guid: 1b6d8f1438d64424690a03922348bb25,
     type: 3}
   UIHealthBarInstance: {fileID: 0}
+  UIBleedingBarInstance: {fileID: 0}
   bleedingBarShift: 90
   healthBarShift: 100
 --- !u!54 &5495580765360236000
@@ -228,6 +233,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 161207162983488641}
   animatorCallback: {fileID: 1658017845736297113}
+  minFlipDelay: 0.3
+  readyToSwitchState: 1
 --- !u!1 &1701342960178197750
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,5 +1000,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18a0692ab77b2ce4eb9ff9c1eb1d75ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1238804433230381870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682130017879148091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b94f75768dba7940baaea301fd0826d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
