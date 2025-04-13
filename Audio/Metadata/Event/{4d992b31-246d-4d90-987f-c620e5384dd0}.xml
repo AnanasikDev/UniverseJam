@@ -98,6 +98,9 @@
 		<property name="length">
 			<value>2.5</value>
 		</property>
+		<property name="volume">
+			<value>-3.5</value>
+		</property>
 		<property name="pitch">
 			<value>-2.20000005</value>
 		</property>
@@ -170,9 +173,6 @@
 		</property>
 	</object>
 	<object class="SpatialiserEffect" id="{ca9f3059-58eb-455e-b26b-81403be79ef3}">
-		<property name="maximumDistance">
-			<value>45</value>
-		</property>
 		<property name="overrideRange">
 			<value>true</value>
 		</property>
