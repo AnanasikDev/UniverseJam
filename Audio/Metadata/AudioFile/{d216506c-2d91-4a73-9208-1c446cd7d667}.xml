@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{d216506c-2d91-4a73-9208-1c446cd7d667}">
+		<property name="assetPath">
+			<value>stonefootsetp-05.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.35833333333333334</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a9a10d87-9026-4198-b822-c24e23e827bb}</destination>
+		</relationship>
+	</object>
+</objects>
