@@ -17,6 +17,7 @@ namespace Enemies
         {
             this.type = StateEnum.Attack;
             self.animator.animatorCallback.onAttackPerformedEvent += FinishAttack;
+            self.animator.animatorCallback.onAttackExitEvent += ExitAttack;
         }
 
         public override bool IsPossibleChangeFrom()
@@ -52,6 +53,7 @@ namespace Enemies
         private void StartAttack()
         {
             onStartedAttacking?.Invoke();
+            self.animator.readyToSwitchState = false;
         }
 
         private void FinishAttack()
@@ -60,6 +62,11 @@ namespace Enemies
             {
                 PlayerController.instance.healthComp.TakeDamage(self.settings.damagePerHit);
             }
+        }
+
+        private void ExitAttack()
+        {
+            self.animator.readyToSwitchState = true;
         }
 
         public override void DrawGizmos()

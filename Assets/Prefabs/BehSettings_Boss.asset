@@ -21,7 +21,7 @@ MonoBehaviour:
   useDash: 0
   walkingAnimationSpeed: 0.4
   attackAnimationSpeed: 0.6
-  attackExitTime: 1.2
+  attackExitTime: 0
   deathAnimationSpeed: 0.3
   maxChaseDistance: 40
   randomMovementSpeed: {x: 1.6583432, y: 1.9437177}

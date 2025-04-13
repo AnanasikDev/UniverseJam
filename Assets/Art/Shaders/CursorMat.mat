@@ -36,10 +36,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _Angle: 90
-    - _Distance: 0.45
+    - _Distance: 0.44
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Thickness: 0.45
+    - _Thickness: 0.52
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &6257243673748645279

@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avoidanceRadius: 2
   weight: 1
+  requirePlayerInTheRoom: 0
   useFlee: 0
   useStealth: 1
   useWander: 0
   useDash: 1
   walkingAnimationSpeed: 1
   attackAnimationSpeed: 1
-  attackExitTime: 0.1
+  attackExitTime: 0
   deathAnimationSpeed: 1
   maxChaseDistance: 20
   randomMovementSpeed: {x: 5.2, y: 5.2}

@@ -11,6 +11,8 @@ namespace Enemies
         protected float lastTimeFlipped;
         [SerializeField] protected float minFlipDelay = 0.3f;
 
+        public bool readyToSwitchState = true;
+
         public virtual bool CanFlip() => Time.time - lastTimeFlipped > minFlipDelay;
         public virtual void Flip(float sign)
         {

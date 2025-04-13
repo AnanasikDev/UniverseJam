@@ -50,8 +50,8 @@ namespace Enemies
                 },
                 { StateEnum.Attack, new List<Transition>()
                     {
-                        new Transition(StateEnum.Attack, StateEnum.Chase, (State state) => self.vec2player.magnitude > self.settings.maxAttackDistance + 0.2f, delay: self.settings.attackExitTime),
-                        new Transition(StateEnum.Attack, StateEnum.Idle, delay: self.settings.attackExitTime)
+                        new Transition(StateEnum.Attack, StateEnum.Chase, (State state) => self.vec2player.magnitude > self.settings.maxAttackDistance + 0.2f && self.animator.readyToSwitchState, delay: self.settings.attackExitTime),
+                        new Transition(StateEnum.Attack, StateEnum.Idle, (State state) => self.animator.readyToSwitchState, delay: self.settings.attackExitTime)
                     }
                 },
                 { StateEnum.Stealth, new List<Transition>()
