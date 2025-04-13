@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 public class UIProgressBar : AbstractUIProgress
 {
     [SerializeField][ReadOnly] private float width;
-    
+
     private void SetDoAnimateColor()
     {
         if (Application.isPlaying && !doAnimateForegroundColor && foreground)

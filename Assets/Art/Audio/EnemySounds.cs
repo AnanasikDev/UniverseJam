@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySounds : MonoBehaviour
@@ -16,7 +14,7 @@ public class EnemySounds : MonoBehaviour
 
     public void Tension()
     {
-        AudioManager.Instance.PlayOneShotString("Tension",gameObject.transform.position);
+        AudioManager.Instance.PlayOneShotString("Tension", gameObject.transform.position);
     }
 
     public void Slam()

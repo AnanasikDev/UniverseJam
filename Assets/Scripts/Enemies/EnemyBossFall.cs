@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Enemies
@@ -8,7 +7,7 @@ namespace Enemies
         private new Rigidbody rigidbody;
         private EnemyAI ai;
         [SerializeField] private bool initOnAwake;
-        
+
         private void Awake()
         {
             if (initOnAwake) Init();

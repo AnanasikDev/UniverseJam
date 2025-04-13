@@ -33,7 +33,7 @@ public class HealthComp : MonoBehaviour
     [SerializeField] private bool applyBleedingEffect = true;
     [SerializeField][ShowIf("applyBleedingEffect")][ProgressBar(0.0f, 1.0f, r: 1.0f, g: 0.3f, b: 0.25f)][ReadOnly] private float bleedingProgress = 0.0f;
     [SerializeField][ShowIf("applyBleedingEffect")][Range(1, 5)] private float bleedingDamageFactor = 3.0f;
-    
+
     [Tooltip("Multiplier for the speed of building up bleeding")][SerializeField][ShowIf("applyBleedingEffect")][Range(0, 10)] private float bleedingSpeedFactor = 1.0f;
     private float currentBleedingDamageFactor = 1.0f;
     [SerializeField][ShowIf("applyBleedingEffect")][Range(0, 0.5f)] private float bleedingRestoreSpeed = 0.1f;

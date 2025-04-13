@@ -1,8 +1,7 @@
-using System.Collections;
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
-using FMODUnity;
-using FMOD.Studio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -64,7 +63,7 @@ public class AudioManager : MonoBehaviour
         PlayOneShotString("BGnoise", Vector3.zero);
     }
     private EventInstance ambienceEventInstance;
-    private EventInstance musicEventInstance;    
+    private EventInstance musicEventInstance;
     public void InitializeMusic(EventReference musicEventReference)
     {
         musicEventInstance = CreateEventInstance(musicEventReference);
@@ -73,7 +72,7 @@ public class AudioManager : MonoBehaviour
     public void SetMusicParameter(string parameterName, float parameterValue)
     {
         musicEventInstance.setParameterByName(parameterName, parameterValue);
-    }   
+    }
     public void InitializeAmbience(EventReference ambienceEventReference)
     {
         ambienceEventInstance = CreateEventInstance(ambienceEventReference);
@@ -113,12 +112,12 @@ public class AudioManager : MonoBehaviour
     // i could make event instances into a list and edit parameters from there, but add functionality later.
     private void CleanUp()
     {
-        foreach(EventInstance eventInstance in eventInstances)
+        foreach (EventInstance eventInstance in eventInstances)
         {
             eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             eventInstance.release();
         }
-        foreach(StudioEventEmitter emitter in eventEmitters)
+        foreach (StudioEventEmitter emitter in eventEmitters)
         {
             emitter.Stop();
         }

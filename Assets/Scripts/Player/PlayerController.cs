@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     [TitleGroup("Movement")]
     [SerializeField][OnValueChanged("SetMovementInputFunction")] private bool useSmoothInput = true;
 
-    [SerializeField][Range(0, 7)] private float speedX = 5;
-    [SerializeField][Range(0, 7)] private float speedZ = 5;
+    [SerializeField][Range(0, 7)] public float speedX = 5;
+    [SerializeField][Range(0, 7)] public float speedZ = 5;
     [ShowInInspector] public bool IsIdle { get { return Mathf.Approximately(inputHorizontal, 0) && Mathf.Approximately(inputVertical, 0); } }
     [ShowInInspector] public bool IsMoving { get { return !IsIdle; } }
 
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         healthComp = GetComponent<HealthComp>();
         playerStamina = GetComponent<PlayerStamina>();
 
-        healthComp.onDiedEvent += OnDied;   
+        healthComp.onDiedEvent += OnDied;
     }
 
     private void SetMovementInputFunction()

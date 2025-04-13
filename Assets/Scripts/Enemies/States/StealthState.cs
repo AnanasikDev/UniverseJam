@@ -24,8 +24,8 @@ namespace Enemies
 
         public override bool IsPossibleChangeTo()
         {
-            return (totalStatesActive < World.instance.globalEnemiesSettings.maxStealthEnemies || AttackState.totalStatesActive > 2) && 
-                Random.Range(0.0f, 1.0f) < (self.settings.stealthChance / 100.0f) * Time.deltaTime && 
+            return (totalStatesActive < World.instance.globalEnemiesSettings.maxStealthEnemies || AttackState.totalStatesActive > 2) &&
+                Random.Range(0.0f, 1.0f) < (self.settings.stealthChance / 100.0f) * Time.deltaTime &&
                 self.vec2player.magnitude < self.settings.maxChaseDistance && self.settings.useStealth;
         }
 

@@ -4709,7 +4709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies: []
   healthEntities: []
-  globalEnemiesSettings: {fileID: 11400000, guid: d71115a71954ea5498c826448ce54d72,
+  globalEnemiesSettings: {fileID: 11400000, guid: b3f6d9edde7961644b2321451809eea7,
     type: 2}
   doIncludeInactiveObjects: 0
   rooms: []
@@ -7624,6 +7624,7 @@ MonoBehaviour:
   model: {fileID: 1163515122}
   animatorCallback: {fileID: 1163515125}
   minFlipDelay: 0.3
+  readyToSwitchState: 1
 --- !u!114 &9155116674995698782
 MonoBehaviour:
   m_ObjectHideFlags: 0

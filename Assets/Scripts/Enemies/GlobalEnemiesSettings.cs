@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemies
 {
-    [CreateAssetMenu(menuName="Global Enemies Settings", fileName="GlobalEnemiesSettings_")]
+    [CreateAssetMenu(menuName = "Global Enemies Settings", fileName = "GlobalEnemiesSettings_")]
     public class GlobalEnemiesSettings : ScriptableObject
     {
         [Range(0, 10)] public int maxAttackingEnemies = 2;

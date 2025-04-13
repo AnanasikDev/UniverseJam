@@ -34,7 +34,7 @@ namespace Enemies
             float angle = Random.Range(0, Mathf.PI * 2);
             float radius = Random.Range(self.settings.randomWanderDistance.x, self.settings.randomWanderDistance.y);
 
-            target = Vector3.Lerp(PlayerController.instance.transform.position, self.transform.position, self.vec2player.magnitude / 5.0f) + 
+            target = Vector3.Lerp(PlayerController.instance.transform.position, self.transform.position, self.vec2player.magnitude / 5.0f) +
                     new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
         }
 

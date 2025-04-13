@@ -76,12 +76,12 @@ public class PlayerDash : MonoBehaviour
         Vector3 newPos = rigidbody.position + dashDirection * currentSpeed * Time.fixedDeltaTime;
         bool isObscured = Physics.SphereCast
         (
-            rigidbody.position + Vector3.up * 0.5f - dashDirection * 0.1f, 
-            0.5f, 
-            dashDirection, 
-            out RaycastHit hitInfo, 
-            Mathf.Clamp(currentSpeed * Time.fixedDeltaTime, 0.1f, 10.0f), 
-            1 << 0, 
+            rigidbody.position + Vector3.up * 0.5f - dashDirection * 0.1f,
+            0.5f,
+            dashDirection,
+            out RaycastHit hitInfo,
+            Mathf.Clamp(currentSpeed * Time.fixedDeltaTime, 0.1f, 10.0f),
+            1 << 0,
             QueryTriggerInteraction.Ignore
         );
 
@@ -94,7 +94,7 @@ public class PlayerDash : MonoBehaviour
         else
         {
             float dot = Vector3.Dot(dashDirection, -hitInfo.normal);
-            
+
             float angleToSurfaceRad = Mathf.PI / 2.0f - Mathf.Acos(dot);
             float angleToSurfaceDeg = angleToSurfaceRad * Mathf.Rad2Deg;
 

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Enemies
 {
     public class IdleState : State

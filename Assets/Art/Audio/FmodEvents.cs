@@ -1,6 +1,6 @@
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
-using FMODUnity;
 
 [System.Serializable]
 public class SoundEntry
@@ -19,7 +19,7 @@ public class FmodEvents : MonoBehaviour
     public static FmodEvents Instance { get; private set; }
 
     private void Awake()
-    {       
+    {
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -61,5 +61,5 @@ public class FmodEvents : MonoBehaviour
     }
 
 
-  
+
 }

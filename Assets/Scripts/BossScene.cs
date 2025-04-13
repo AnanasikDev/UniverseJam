@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Enemies;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,6 +28,7 @@ public class BossScene : MonoBehaviour
     private void Start()
     {
         HealthComp.onAnyDiedEvent += TryInit;
+        Debug.Log($"World instance is equal to '{World.instance}'");
         defaultMaxAttackingAmount = World.instance.globalEnemiesSettings.maxAttackingEnemies;
     }
 
@@ -59,13 +59,15 @@ public class BossScene : MonoBehaviour
         {
             yield return new WaitForSeconds(intervalSeconds);
             EnemyAI enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length - 1)]);
-            enemy.transform.position = targetTransform.position + 
+            enemy.transform.position = targetTransform.position +
                 Vector3.right * Random.Range(-spawnPosXRandomness, spawnPosXRandomness) +
                 targetTransform.forward * Random.Range(0, spawnPosZRandomness);
             enemy.enabled = false;
             var bossfall = enemy.AddComponent<EnemyBossFall>();
             bossfall.Init();
             currentAmount++;
+            PlayerController.instance.speedX = Mathf.Clamp(PlayerController.instance.speedX - 0.3f, 0, 100);
+            PlayerController.instance.speedZ = Mathf.Clamp(PlayerController.instance.speedZ - 0.3f, 0, 100);
             if (currentAmount < targetAmount)
                 yield return spawn();
             else

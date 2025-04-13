@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Enemies
 {
-    [CreateAssetMenu(fileName="BehSettings_", menuName="Enemy Behaviour")]
+    [CreateAssetMenu(fileName = "BehSettings_", menuName = "Enemy Behaviour")]
     public class BehaviourSettings : ScriptableObject
     {
         [TitleGroup("Agent")]
@@ -32,7 +32,7 @@ namespace Enemies
         [Range(0, 9)] public float maxAttackApproachDistance = 2;
         [Range(0, 9)] public float minAttackApproachDistance = 1.5f;
         [Range(0, 100)] public float damagePerHit = 20;
-        [Range(0, 8)]   public float hitIntervalSeconds = 1;
+        [Range(0, 8)] public float hitIntervalSeconds = 1;
 
         [TitleGroup("Flee")]
         [ShowIf("useFlee")][Range(0, 25)] public float maxFleeDistance = 12;
@@ -41,13 +41,13 @@ namespace Enemies
         [ShowIf("useFlee")][MinMaxSlider(0, 0.5f, showFields: true)] public Vector2 randomFleeChance = new Vector2(0.1f, 0.3f);
 
         [TitleGroup("Stealth")]
-        [ShowIf("useStealth")][MinMaxSlider(0, 10, showFields:true)] public Vector2 randomStealthTargetDistance = new Vector2(3, 5.5f);
+        [ShowIf("useStealth")][MinMaxSlider(0, 10, showFields: true)] public Vector2 randomStealthTargetDistance = new Vector2(3, 5.5f);
         [ShowIf("useStealth")][MinMaxSlider(0, 5, showFields: true)] public Vector2 randomStealthSpeed = new Vector2(1.4f, 2f);
-        [ShowIf("useStealth")][MinMaxSlider(0, 5, showFields: true)] public Vector2 randomStealthDurationSeconds = new Vector2(1.2f, 2.2f);    
+        [ShowIf("useStealth")][MinMaxSlider(0, 5, showFields: true)] public Vector2 randomStealthDurationSeconds = new Vector2(1.2f, 2.2f);
         [ShowIf("useStealth")][SuffixLabel("%")][Range(0, 100)] public float stealthChance = 30;
 
         [TitleGroup("Wander")]
-        [ShowIf("useWander")][MinMaxSlider(0, 25, showFields:true)] public Vector2 randomWanderDistance = new Vector2(6, 12);
+        [ShowIf("useWander")][MinMaxSlider(0, 25, showFields: true)] public Vector2 randomWanderDistance = new Vector2(6, 12);
         [ShowIf("useWander")][MinMaxSlider(0, 5, showFields: true)] public Vector2 randomWanderSpeed = new Vector2(0.9f, 1.3f);
         [ShowIf("useWander")][SuffixLabel("%")][Range(0, 100)] public float wanderChance = 25;
 
