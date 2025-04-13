@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Enemies
@@ -7,6 +8,7 @@ namespace Enemies
         private new Rigidbody rigidbody;
         private EnemyAI ai;
         [SerializeField] private bool initOnAwake;
+        [SerializeField] private float initDelay;
 
         private void Awake()
         {
@@ -15,11 +17,16 @@ namespace Enemies
 
         public void Init()
         {
-            rigidbody = GetComponent<Rigidbody>();
-            rigidbody.useGravity = true;
-            rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-            rigidbody.velocity = Vector3.zero;
-            ai = GetComponent<EnemyAI>();
+            IEnumerator wait()
+            {
+                yield return new WaitForSeconds(initDelay);
+                rigidbody = GetComponent<Rigidbody>();
+                rigidbody.useGravity = true;
+                rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+                rigidbody.velocity = Vector3.zero;
+                ai = GetComponent<EnemyAI>();
+            }
+            StartCoroutine(wait());
         }
 
         private void OnTriggerEnter(Collider other)

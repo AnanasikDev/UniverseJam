@@ -181,12 +181,24 @@
 	<object class="MixerBusEffectChain" id="{23c5e376-b4f0-4df4-a0d1-acb52d11ea07}">
 		<relationship name="effects">
 			<destination>{7324f37b-ceaa-4736-9d17-7bd33e34adfc}</destination>
+			<destination>{57bd8265-57a3-430e-af97-c9c726261b95}</destination>
 			<destination>{a2a95e71-c49d-43ef-bd62-875bbf1c0ded}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{e888d512-4cea-4d97-83dc-b4a45d91dfd3}" />
 	<object class="MixerBusFader" id="{75d4fa22-e380-4f80-b51b-5965beebac63}" />
 	<object class="MixerBusFader" id="{7324f37b-ceaa-4736-9d17-7bd33e34adfc}" />
+	<object class="ThreeEQEffect" id="{57bd8265-57a3-430e-af97-c9c726261b95}">
+		<property name="lowGain">
+			<value>-13.5</value>
+		</property>
+		<property name="midGain">
+			<value>-14.5</value>
+		</property>
+		<property name="highGain">
+			<value>-80</value>
+		</property>
+	</object>
 	<object class="SFXReverbEffect" id="{a2a95e71-c49d-43ef-bd62-875bbf1c0ded}">
 		<property name="wetLevel">
 			<value>-16.5</value>
